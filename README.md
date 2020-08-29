@@ -1,68 +1,157 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT SHIELDS -->
+<div align="center">
+  <a href="https://www.megahackwomen.com.br/">
+    <img src="https://img.shields.io/badge/hackathon-MegaHackthonWomen-ff69b4.svg" alt="Megahack Women"/>
+  </a>
+  <a href="https://github.com/YasminTeles/ClinicAll">
+    <img src="https://img.shields.io/badge/status-active-success.svg" alt="Status"/>
+  </a>
+  <a href="https://github.com/YasminTeles/ClinicAll/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT Licence"/>
+  </a>
+</div>
 
-## Available Scripts
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/YasminTeles/ClinicAll">
+    <img src="src/assets/logo.svg" alt="Logo">
+  </a>
 
-In the project directory, you can run:
+  <!-- <h3 align="center">ClinicAll</h3> -->
 
-### `yarn start`
+  <p align="center">
+    ClinicAll, uma plataforma, múltiplas experiências.
+    <br />
+    <!-- <br /> -->
+    <!-- <a href="https://github.com/YasminTeles/ClinicAll"><strong>Explore nossa documentação »</strong></a> -->
+    <br />
+    <br />
+    Gostou do projeto? Visite nossa <a href="https://clinicall.vercel.app/">página de demostração</a>
+  </p>
+</p>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Índice
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+* [Sobre o projeto](#sobre-o-projeto)
+  * [Tecnologias](#tecnologias)
+* [Demostração](#demostração)
+* [Plano de negócio e Roadmap](#plano-de-negócio-e-roadmap)
+* [Começe a usar](#Começe-a-usar)
+  * [Pre requisitos](#pre-requisitos)
+  * [Instalação](#instalação)
+* [Licença](#Licença)
+* [Dream Team](#dream-team)
+* [Acknowledgements](#acknowledgements)
 
-### `yarn test`
+## ClinicAll
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Você sabia que 54% das queixas dos pacientes passam despercebidas pelos médicos ao longo das consultas. Além disso, quase 99% dos sites do Brasil apresentam barreiras de navegação para pessoas com deficiência.
 
-### `yarn build`
+Diante desse cenário, como seria possível promover online, qualidade e inclusão na jornada médica dos pacientes?
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Apresentamos a ClinicAll, uma plataforma de telemedicina que promove autonomia e acessibilidade, dando ao usuário a possibilidade de liderar sua jornada na saúde.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Contamos com recursos de Inteligência Artificial que traduzem a fala do médico e paciente em imagens ou desenhos relacionados, transmitidos durante o atendimento para facilitar a compreensão e a comunicação entre médicos e pacientes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Também disponibilizamos uma ficha técnica única, responsável por reunir dados, observações e recomendações de todos os profissionais consultados em um só lugar, garantindo acesso fácil e rápido ao histórico médico. Além disso, um resumo com hiperlinks que direcionam o usuário a sites e pesquisas confiáveis sobre o assunto abordado.
 
-### `yarn eject`
+Nossa plataforma torna os pacientes protagonistas, antes, durante e depois do atendimento clínico, contamos serviços para agendamento de consultas online e recursos de assinatura e receituário digital, que permitem a compra de medicamentos diretamente em nosso marketplace de farmácias. Além disso, nossa interface conta com ferramentas de inclusão para pessoas com necessidades especiais, como legendas, chat e libras, valorizando uma jornada qualitativa e empoderada a todos os usuários.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Com isso, os pilares da informação e autocuidado passam a estar presentes diariamente na vida dos pacientes, fato que também auxilia convênios e empresas de saúde, pois, segundo pesquisas, há uma economia anual de 4 bilhões de dólares quando ações de acompanhamento em saúde substituem atendimentos emergenciais desnecessários.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Tecnologias
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+O projeto ClinicAll foi desenvolvida utilizando as seguintes frameworks e plataformas:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* [Material-ui](https://material-ui.com/)
+* [React](https://pt-br.reactjs.org/)
+* [Vercel](https://vercel.com/)
+* [Redux](https://redux.js.org/)
+* [SQlite3](https://www.sqlite.org/index.html)
 
-## Learn More
+## Demostração
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[![ClinicAll](https://img.youtube.com/vi/5rDJkGrCuU4/0.jpg)](https://www.youtube.com/watch?v=5rDJkGrCuU4)
 
-### Code Splitting
+## Plano de negócio e Roadmap
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+[![ClinicAll Roadmap](https://img.youtube.com/vi/RylRUIAxtlU/0.jpg)](https://www.youtube.com/watch?v=RylRUIAxtlU)
 
-### Analyzing the Bundle Size
+## Começe a usar
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Estas são as instruções para configurar o projeto localmente.
 
-### Making a Progressive Web App
+### Pre requisitos
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Estas são as ferramentas que você precisa ter para usar o software e como instalá-las.
 
-### Advanced Configuration
+* npm
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```sh
+npm install npm@latest -g
+```
 
-### Deployment
+* yarn
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```sh
+npm install --global yarn
+```
 
-### `yarn build` fails to minify
+* vercel
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```sh
+npm i -g vercel
+```
+
+### Instalação
+
+1. Clone o repositório
+
+```sh
+git clone https://github.com/YasminTeles/ClinicAll.git
+```
+
+3. Instale as dependências do projeto
+
+```sh
+yarn
+```
+
+5. Faça o download das variáveis de ambiente
+
+```sh
+vercel env pull
+```
+
+6. Rode localmente o projeto
+
+```sh
+vercel dev
+```
+
+## Licença
+
+Distribuído sob a licença MIT. Veja [`LICENSE`](LICENSE) para mais informações.
+
+## Dream Team
+
+[Daniela Leite](https://www.linkedin.com/in/leite-daniela/) - Marketing
+
+[Ingrid Pacheco](https://www.linkedin.com/in/ingridqpacheco/) - Desenvolvimento de software
+
+[Julia Demuner](https://www.linkedin.com/in/julia-demuner/) - Business
+
+[Maria Gabriela Neves](https://www.linkedin.com/in/mariagabrielaneves/) - User Experience
+
+[Yasmin Teles](https://www.linkedin.com/in/yasminteles/) - Desenvolvimento de software
+
+## Acknowledgements
+
+* [Auth0 - Autenticação](https://auth0.com/)
+* [Twilio - Vídeo chat](https://www.twilio.com/docs)
+* [Azure - Inteligência artificial](https://azure.microsoft.com/pt-br/)
+* [Human body - imagens interativas](https://github.com/AvinashVunnava/react-humanbody)
+* [VLibras - tradução de texto para libras](https://www.vlibras.gov.br/)
