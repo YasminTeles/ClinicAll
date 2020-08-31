@@ -1,0 +1,67 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "airbnb"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import",
+        "eslint-plugin-import-helpers",
+        "react-hooks"
+    ],
+    "rules": {
+      "import-helpers/order-imports": [
+        "warn",
+        {
+            "newlinesBetween": "always",
+            "groups": [
+                "/^react/",
+                "module",
+                "/^@shared/",
+                ["parent", "sibling", "index"]
+            ],
+            "alphabetize": { "order": "asc", "ignoreCase": true }
+        }
+      ],
+      "quotes": ["error", "double"],
+      "semi": ["error", "never"],
+      "import/no-named-as-default": "off",
+      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true}],
+      "no-console": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "react/prop-types": [
+        "warn",
+        {
+          "ignore": [
+            "children",
+            "classes",
+            "className"
+          ]
+        }
+      ]
+    }
+}
