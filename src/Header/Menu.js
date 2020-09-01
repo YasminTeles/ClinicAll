@@ -1,68 +1,48 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import React from "react"
 
-import "./Menu.scss";
+import Button from "@material-ui/core/Button"
+import { withStyles } from "@material-ui/core/styles"
 
-const RegularButton = withStyles((theme) => ({
+import LoginButton from "../components/authentication/LoginButton"
+import "./Menu.scss"
+
+const RegularButton = withStyles(() => ({
   root: {
-    textTransform: 'none',
+    textTransform: "none",
     borderRadius: 55,
-    fontFamily: 'Mulish',
+    fontFamily: "Mulish",
     fontSize: 16,
     height: 30,
-    color: '#1F1534',
-    '&:hover': {
-      color: '#13DEDE',
-      backgroundColor: 'white',
-      fontWeight: 'bold'
+    color: "#1F1534",
+    "&:hover": {
+      color: "#13DEDE",
+      backgroundColor: "white",
+      fontWeight: "bold",
     },
   },
-}))(Button);
-
-const JoinButton = withStyles((theme) => ({
-  root: {
-    textTransform: 'none',
-    borderRadius: 55,
-    fontFamily: 'Mulish',
-    fontSize: 16,
-    height: 30,
-    backgroundColor: '#5B5B5B',
-    '&:hover': {
-      backgroundColor: 'black',
-      fontWeight: 'bold'
-    },
-  },
-}))(Button);
+}))(Button)
 
 function Menu() {
   return (
-    <div className='button-group'>
-      <RegularButton variant="text" color="primary" className='button' disableElevation>
+    <div className="button-group">
+      <RegularButton variant="text" color="primary" className="button" disableElevation>
         Home
       </RegularButton>
-      <RegularButton variant="text" color="primary" className='button' disableElevation>
+      <RegularButton variant="text" color="primary" className="button" disableElevation>
         Médicos
       </RegularButton>
-      <RegularButton variant="text" color="primary" className='button' disableElevation>
+      <RegularButton variant="text" color="primary" className="button" disableElevation>
         Recursos
       </RegularButton>
-      <RegularButton variant="text" color="primary" className='button' disableElevation>
+      <RegularButton variant="text" color="primary" className="button" disableElevation>
         Serviços
       </RegularButton>
-      <RegularButton variant="text" color="primary" className='button' disableElevation>
+      <RegularButton variant="text" color="primary" className="button" disableElevation>
         Sobre nós
       </RegularButton>
-      <JoinButton variant="contained" color="primary" className='button' disableElevation>
-        Entrar
-      </JoinButton>
+      <LoginButton />
     </div>
-  );
+  )
 }
 
-// backgroundColor: '#13DEDE',
-// '&:hover': {
-//   backgroundColor: '#13BADE',
-// },
-
-export default Menu;
+export default Menu
