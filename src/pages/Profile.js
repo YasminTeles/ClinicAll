@@ -2,6 +2,7 @@ import React from "react"
 
 import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react"
 
+import AppointmentButton from "../components/appointment/AppointmentButton"
 import Header from "../components/header/Header"
 import Home from "./Home"
 
@@ -17,6 +18,7 @@ function Profile() {
         {user.name}
       </h1>
 
+      <AppointmentButton />
     </>
   )
 }
