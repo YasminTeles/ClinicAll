@@ -18,7 +18,7 @@ const RegularButton = withStyles(() => ({
     height: 30,
     color: "#1F1534",
     "&:hover": {
-      color: "#13DEDE",
+      color: "black",
       backgroundColor: "white",
       fontWeight: "bold",
     },

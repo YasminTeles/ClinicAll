@@ -1,0 +1,11 @@
+.room {
+  .local-participant {
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 5vmin;
+  }
+  .remote-participant {
+    width: 100%
+  }
+}

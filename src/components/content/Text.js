@@ -2,6 +2,7 @@ import React from "react"
 
 import Button from "@material-ui/core/Button"
 import { withStyles } from "@material-ui/core/styles"
+import { Redirect } from "react-router-dom"
 
 import "./Text.scss"
 
@@ -18,21 +19,40 @@ const ColorButton = withStyles(() => ({
   },
 }))(Button)
 
-function Text() {
-  return (
-    <div className="text">
-      <div className="title">
-        Cuidado médico virtual pensado para você
+class Text extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      openChat: false
+    }
+  }
+
+  openChat = () => {
+    this.setState({
+      openChat: true
+    })
+  }
+
+  render(){
+    const {openChat} = this.state
+
+    return (
+      <div className="text">
+        <div className="title">
+          Cuidado médico virtual pensado para você
+        </div>
+        <div className="description">
+          Marcação online e atendimento acessível. Forma de utilizar
+          a tecnologia a favor de pessoas com cuidados especiais.
+        </div>
+        <ColorButton variant="contained" color="primary" className='button' disableElevation onClick={this.openChat}>
+          Consulta hoje
+        </ColorButton>
+        {openChat && <Redirect to={{ pathname: "/chat" }} />}
       </div>
-      <div className="description">
-        Marcação online e atendimento acessível. Forma de utilizar
-        a tecnologia a favor de pessoas com cuidados especiais.
-      </div>
-      <ColorButton variant="contained" color="primary" className="button" disableElevation>
-        Consulta hoje
-      </ColorButton>
-    </div>
-  )
+    )
+  }
 }
 
 export default Text

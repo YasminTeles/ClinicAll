@@ -1,20 +1,45 @@
 import React, { useState, useEffect } from "react"
+import Button from "@material-ui/core/Button"
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { withStyles } from "@material-ui/core/styles"
 
 import Video from "twilio-video"
 
 import Participant from "./Participant"
+import "./Room.scss"
+
+const RegularButton = withStyles(() => ({
+  root: {
+    textTransform: "none",
+    position: "absolute",
+    top: "5vmin",
+    left: 40,
+    fontWeight: "bold",
+    borderRadius: 55,
+    fontFamily: "Mulish",
+    fontSize: 16,
+    height: 30,
+    zIndex: 4,
+    color: "#1F1534",
+    "&:hover": {
+      color: "black",
+      backgroundColor: "white",
+      fontWeight: "bold",
+    },
+  },
+}))(Button)
 
 const Room = ({ roomName, token, handleLogout }) => {
   const [room, setRoom] = useState(null)
   const [participants, setParticipants] = useState([])
 
   const remoteParticipants = participants.map((participant) => (
-    <Participant key={participant.sid} participant={participant} />
+    <Participant key={participant.sid} participant={participant} type="remote"/>
   ))
 
   useEffect(() => {
     const participantConnected = (participant) => {
-      setParticipants((prevParticipants) => [...prevParticipants, participant])
+        setParticipants((prevParticipants) => [...prevParticipants, participant])
     }
     const participantDisconnected = (participant) => {
       setParticipants((prevParticipants) => prevParticipants.filter((p) => p !== participant))
@@ -44,24 +69,22 @@ const Room = ({ roomName, token, handleLogout }) => {
 
   return (
     <div className="room">
-      <h2>
-        Room:
-        {" "}
-        {roomName}
-      </h2>
-      <button onClick={handleLogout}>Log out</button>
+      <RegularButton variant="text" color="primary" className="button" startIcon={<ArrowBackIcon />} disableElevation onClick={handleLogout}>
+        Voltar para o dashboard
+      </RegularButton>
+
+      <div className="remote-participant">{remoteParticipants[0]}</div>
       <div className="local-participant">
         {room ? (
           <Participant
             key={room.localParticipant.sid}
             participant={room.localParticipant}
+            type="local"
           />
         ) : (
           ""
         )}
       </div>
-      <h3>Remote Participants</h3>
-      <div className="remote-participants">{remoteParticipants}</div>
     </div>
   )
 }

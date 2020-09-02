@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Participant = ({ participant }) => {
+import "./Participant.scss"
+
+const Participant = ({ participant, type }) => {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
 
@@ -51,11 +53,34 @@ const Participant = ({ participant }) => {
     }
   }, [videoTracks]);
 
+  useEffect(() => {
+    const audioTrack = audioTracks[0];
+    if (audioTrack) {
+      audioTrack.attach(audioRef.current);
+      return () => {
+        audioTrack.detach();
+      };
+    }
+  }, [audioTracks]);
+
   return (
     <div className="participant">
-      <h3>{participant.identity}</h3>
-      <video ref={videoRef} autoPlay={true} />
-      <audio ref={audioRef} autoPlay={true} muted={true} />
+      {
+        type === 'remote' ? (
+          <div className="remote">
+            <h3 className="name">Consulta com Dr. {participant.identity}</h3>
+            <h4 className="description">O seu plano oferece cobertura total a essa consulta.</h4>
+            <video className="video" ref={videoRef} autoPlay={true} />
+            <audio className="audio" ref={audioRef} autoPlay={true} />
+          </div>
+        ) : (
+          <div className="local">
+            <h3 className="name">{participant.identity}</h3>
+            <video className="video" ref={videoRef} autoPlay={true} />
+            <audio className="audio" ref={audioRef} autoPlay={true} muted={true} />
+          </div>
+        )
+      }
     </div>
   );
 };

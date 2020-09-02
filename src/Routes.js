@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react"
 
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
-import Chat from './VideoChat'
+import VideoChat from './pages/VideoChat'
 
 function Routes() {
   const { isAuthenticated } = useAuth0()
@@ -21,7 +21,7 @@ function Routes() {
         ))}
       />
       <Route path="/profile" component={Profile} />
-      <Route path="/chat" component={Chat} />
+      <Route path="/chat" component={VideoChat} />
     </BrowserRouter>
   )
 }
