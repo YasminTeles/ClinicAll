@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect } from "react-router-dom"
 
 import { useAuth0 } from "@auth0/auth0-react"
 
-import Home from "./Home"
+import Home from "./pages/Home"
 import Profile from "./pages/Profile"
 import Chat from './VideoChat'
 

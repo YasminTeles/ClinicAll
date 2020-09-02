@@ -3,7 +3,8 @@ import React from "react"
 import Button from "@material-ui/core/Button"
 import { withStyles } from "@material-ui/core/styles"
 
-import LoginButton from "../components/authentication/LoginButton"
+import LoginButton from "../authentication/LoginButton"
+
 import "./Menu.scss"
 
 const RegularButton = withStyles(() => ({
