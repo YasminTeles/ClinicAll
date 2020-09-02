@@ -1,5 +1,6 @@
 import React from "react"
 
+import { useAuth0 } from "@auth0/auth0-react"
 import Button from "@material-ui/core/Button"
 import { withStyles } from "@material-ui/core/styles"
 
@@ -24,10 +25,11 @@ const RegularButton = withStyles(() => ({
 }))(Button)
 
 function Menu() {
+  const { isAuthenticated } = useAuth0()
   return (
     <div className="button-group">
       <RegularButton variant="text" color="primary" className="button" disableElevation>
-        Home
+        {isAuthenticated ? ("Dashboard") : ("Home")}
       </RegularButton>
       <RegularButton variant="text" color="primary" className="button" disableElevation>
         Médicos
@@ -41,7 +43,9 @@ function Menu() {
       <RegularButton variant="text" color="primary" className="button" disableElevation>
         Sobre nós
       </RegularButton>
-      <LoginButton />
+
+      {!isAuthenticated && (<LoginButton />)}
+
     </div>
   )
 }
