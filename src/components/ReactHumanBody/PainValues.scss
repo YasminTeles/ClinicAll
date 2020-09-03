@@ -1,0 +1,28 @@
+.values {
+  display: flex;
+
+  .buttons {
+    margin-left: 20px;
+    margin-right: 5px;
+  }
+
+  .pain-selected {
+    background-color: #096262;
+    color: white;
+    width: 40px;
+    min-width: 40px;
+    &:hover {
+      color: white;
+      background-color: #096262,
+    }
+  }
+
+  .pain-default {
+    width:40px;
+    min-width: 40px;
+    &:hover {
+      color: white;
+      background-color: #096262,
+    }
+  }
+}

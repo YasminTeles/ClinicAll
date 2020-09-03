@@ -123,6 +123,12 @@ const Room = ({ roomName, token, handleLogout }) => {
           )}
         </div>
       </div>
+      { openHumanBody && (
+        <Chat>
+          <Male/>
+          <PainClassification/>
+        </Chat>
+      )}
     </div>
   )
 }
