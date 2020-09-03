@@ -22,6 +22,7 @@
     "react-rtc-real": "^1.11.22",
     "react-scripts": "3.4.3",
     "twilio": "^3.33.0",
+    "twilio-chat": "^4.0.0",
     "twilio-video": "^2.7.2"
   },
   "devDependencies": {
