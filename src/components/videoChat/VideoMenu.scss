@@ -1,0 +1,29 @@
+.box {
+  display: inline-grid;
+  margin-top: 230px;
+  position: absolute;
+  margin-left: 40px;
+  z-index: 6;
+
+  .buttonoff {
+    background-color: #FF3459;
+    color: white !important;
+    border-radius: 8px;
+    margin-bottom: 5px;
+
+    &:hover {
+      background-color: #FF3459;
+    }
+  }
+
+  .buttonon {
+    color: black !important;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 5px;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+}

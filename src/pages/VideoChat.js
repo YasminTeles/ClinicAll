@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom"
 import twilio from "twilio"
 
 import Room from "../components/videoChat/Room"
+import { VideoChatProvider } from "../components/videoChat/videoChatContext";
 
 class VideoChat extends React.Component {
 
@@ -63,14 +64,25 @@ class VideoChat extends React.Component {
   }
 
   render(){
+
+    window.onbeforeunload = () => {
+      this.handleLogout();
+    };
+
+    window.onunload = () => {
+      this.handleLogout();
+    }
+
     const {room, token, back} = this.state
     return (
       <div>
-        {token ? (
-          <Room roomName={room} token={token} handleLogout={this.handleLogout} />
-        ) : back && (
-          <Redirect to={{ pathname: "/" }} />
-        )}
+          {token ? (
+            <VideoChatProvider>
+              <Room roomName={room} token={token} handleLogout={this.handleLogout} />
+            </VideoChatProvider>
+          ) : back && (
+            <Redirect to={{ pathname: "/" }} />
+          )}
       </div>
     )
   }

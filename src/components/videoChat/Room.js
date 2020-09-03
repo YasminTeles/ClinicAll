@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Button from "@material-ui/core/Button"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { withStyles } from "@material-ui/core/styles"
+import VideoMenu from "./VideoMenu"
+import { VideoChatContext } from "./videoChatContext"
+import Chat from "./Chat"
+import Male from "../ReactHumanBody/Male"
+import PainClassification from "../ReactHumanBody/PainClassification"
 
 import Video from "twilio-video"
 
@@ -32,6 +37,8 @@ const RegularButton = withStyles(() => ({
 const Room = ({ roomName, token, handleLogout }) => {
   const [room, setRoom] = useState(null)
   const [participants, setParticipants] = useState([])
+  const context = useContext(VideoChatContext)
+  const {openHumanBody, disableVideo, disableAudio} = context
 
   const remoteParticipants = participants.map((participant) => (
     <Participant key={participant.sid} participant={participant} type="remote"/>
@@ -44,6 +51,7 @@ const Room = ({ roomName, token, handleLogout }) => {
     const participantDisconnected = (participant) => {
       setParticipants((prevParticipants) => prevParticipants.filter((p) => p !== participant))
     }
+
     Video.connect(token, {
       name: roomName,
     }).then((room) => {
@@ -55,6 +63,7 @@ const Room = ({ roomName, token, handleLogout }) => {
 
     return () => {
       setRoom((currentRoom) => {
+
         if (currentRoom && currentRoom.localParticipant.state === "connected") {
           currentRoom.localParticipant.tracks.forEach((trackPublication) => {
             trackPublication.track.stop()
@@ -67,23 +76,52 @@ const Room = ({ roomName, token, handleLogout }) => {
     }
   }, [roomName, token])
 
+  useEffect(() => {
+    if (room && disableAudio) {
+      room.localParticipant.audioTracks.forEach((publication) => {
+        publication.track.disable()
+      })
+    } else if (room && !disableAudio) {
+      room.localParticipant.audioTracks.forEach((publication) => {
+        publication.track.enable()
+      })
+    }
+  }, [room, disableAudio])
+
+  useEffect(() => {
+    if (room && disableVideo) {
+      room.localParticipant.videoTracks.forEach((publication) => {
+        publication.track.disable();
+      })
+    } else if (room && !disableVideo) {
+      room.localParticipant.videoTracks.forEach((publication) => {
+        publication.track.enable()
+      })
+    }
+  }, [room, disableVideo])
+
   return (
     <div className="room">
-      <RegularButton variant="text" color="primary" className="button" startIcon={<ArrowBackIcon />} disableElevation onClick={handleLogout}>
-        Voltar para o dashboard
-      </RegularButton>
+      <div className="video">
+        <RegularButton variant="text" color="primary" className="button" startIcon={<ArrowBackIcon />} disableElevation onClick={handleLogout}>
+          Voltar para o dashboard
+        </RegularButton>
 
-      <div className="remote-participant">{remoteParticipants[0]}</div>
-      <div className="local-participant">
-        {room ? (
-          <Participant
-            key={room.localParticipant.sid}
-            participant={room.localParticipant}
-            type="local"
-          />
-        ) : (
-          ""
-        )}
+        <VideoMenu/>
+
+        <div className="remote-participant">{remoteParticipants[0]}</div>
+        <div className={openHumanBody ? "local-participant-tab" : "local-participant"}>
+          {room ? (
+            <Participant
+              key={room.localParticipant.sid}
+              participant={room.localParticipant}
+              room={room}
+              type="local"
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   )

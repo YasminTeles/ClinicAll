@@ -1,11 +1,32 @@
 .room {
-  .local-participant {
+
+  display: flex;
+
+  .video {
+
     width: 100%;
-    z-index: 1;
-    position: absolute;
-    top: 5vmin;
-  }
-  .remote-participant {
-    width: 100%
+
+    .local-participant {
+      width: 100%;
+      z-index: 1;
+      position: absolute;
+      top: 5vmin;
+    }
+
+    .local-participant-tab {
+      width: 100%;
+      z-index: 1;
+      position: absolute;
+      top: 5vmin;
+      right: 20%;
+    }
+
+    .remote-participant {
+      width: 100%
+    }
+
+    .talk {
+      width: 5px;
+    }
   }
 }
