@@ -1,15 +1,16 @@
-import React from "react"
+import React, {useState} from "react"
 
 import { useAuth0 } from "@auth0/auth0-react"
 import Button from "@material-ui/core/Button"
-import { withStyles } from "@material-ui/core/styles"
+import { makeStyles } from '@material-ui/core/styles';
 
 import LoginButton from "../authentication/LoginButton"
+import { useLocation, Redirect } from 'react-router-dom'
 import User from "./User"
 
 import "./Menu.scss"
 
-const RegularButton = withStyles(() => ({
+const useStyles = makeStyles({
   root: {
     textTransform: "none",
     borderRadius: 55,
@@ -18,34 +19,80 @@ const RegularButton = withStyles(() => ({
     height: 30,
     color: "#1F1534",
     "&:hover": {
-      color: "black",
+      color: "#096262",
       backgroundColor: "white",
       fontWeight: "bold",
     },
   },
-}))(Button)
+  selected: {
+    textTransform: "none",
+    borderRadius: 55,
+    fontFamily: "Mulish",
+    fontSize: 16,
+    height: 30,
+    color: "#096262",
+    fontWeight: "bold",
+    backgroundColor: "white",
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+});
 
 function Menu() {
+  const [page, setPage] = useState("")
   const { isAuthenticated } = useAuth0()
+  let location = useLocation();
+  const classes = useStyles();
+
   return (
     <div className="button-group">
-      <RegularButton variant="text" color="primary" className="button" disableElevation>
+      <Button
+        classes={{
+          root: location.pathname === "/" ? classes.selected : classes.root,
+          label: classes.label,
+        }}
+        onClick={() => setPage("/")}
+      >
         {isAuthenticated ? ("Dashboard") : ("Home")}
-      </RegularButton>
-      <RegularButton variant="text" color="primary" className="button" disableElevation>
-        Médicos
-      </RegularButton>
-      <RegularButton variant="text" color="primary" className="button" disableElevation>
+      </Button>
+      <Button
+        classes={{
+          root: (location.pathname === "/appointments" || location.pathname ===  "/doctor") ? classes.selected : classes.root,
+          label: classes.label,
+        }}
+        onClick={() => setPage("/appointments")}
+      >
+        Consultas
+      </Button>
+      <Button
+        classes={{
+          root: location.pathname === "/resources" ? classes.selected : classes.root,
+          label: classes.label,
+        }}
+        onClick={() => setPage("/resources")}
+      >
         Recursos
-      </RegularButton>
-      <RegularButton variant="text" color="primary" className="button" disableElevation>
+      </Button>
+      <Button
+        classes={{
+          root: location.pathname === "/services" ? classes.selected : classes.root,
+          label: classes.label,
+        }}
+      >
         Serviços
-      </RegularButton>
-      <RegularButton variant="text" color="primary" className="button" disableElevation>
+      </Button>
+      <Button
+        classes={{
+          root: location.pathname === "/about" ? classes.selected : classes.root,
+          label: classes.label,
+        }}
+      >
         Sobre nós
-      </RegularButton>
+      </Button>
 
       {!isAuthenticated ? (<LoginButton />) : (<User />)}
+      {page !== "" && <Redirect to={{ pathname: page }} />}
     </div>
   )
 }

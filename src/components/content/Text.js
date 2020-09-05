@@ -11,7 +11,8 @@ const ColorButton = withStyles(() => ({
     textTransform: "none",
     borderRadius: 55,
     fontFamily: "Mulish",
-    backgroundColor: "#13DEDE",
+    fontWeight: "bold",
+    backgroundColor: "#096262",
     "&:hover": {
       backgroundColor: "#13BADE",
       fontWeight: "bold",
@@ -47,7 +48,7 @@ class Text extends React.Component {
           a tecnologia a favor de pessoas com cuidados especiais.
         </div>
         <ColorButton variant="contained" color="primary" className='button' disableElevation onClick={this.openChat}>
-          Consulta hoje
+          Marcar consulta
         </ColorButton>
         {openChat && <Redirect to={{ pathname: "/chat" }} />}
       </div>

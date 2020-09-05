@@ -1,0 +1,76 @@
+
+.empty-list {
+  height: 17vmin;
+  background-color: #096262;
+  margin-top: -28px;
+
+  .information {
+
+    .doctor-header {
+      margin-top: -28px;
+      padding-top: 40px;
+      display: flex;
+
+      .title {
+        font-family: Mulish;
+        color: white;
+        font-weight: 800;
+        font-size: 28px;
+        margin-left: 50px;
+      }
+
+      .title2 {
+        font-size: 22px;
+        color: white;
+        margin-left: 15px;
+        margin-top: 5px;
+      }
+    }
+
+    .description {
+      font-size: 16px;
+      margin-top: 10px;
+      margin-left: 50px;
+      color: white;
+      margin-bottom: 54px;
+    }
+  }
+}
+
+.full-list {
+  height: 100vmin;
+  background-color: #096262;
+  margin-top: -28px;
+
+  .information {
+
+    .doctor-header {
+      margin-top: -28px;
+      padding-top: 40px;
+      display: flex;
+
+      .title {
+        font-family: Mulish;
+        color: white;
+        font-weight: 800;
+        font-size: 28px;
+        margin-left: 50px;
+      }
+
+      .title2 {
+        font-size: 22px;
+        color: white;
+        margin-left: 15px;
+        margin-top: 5px;
+      }
+    }
+
+    .description {
+      font-size: 16px;
+      margin-top: 10px;
+      margin-left: 50px;
+      color: white;
+      margin-bottom: 54px;
+    }
+  }
+}

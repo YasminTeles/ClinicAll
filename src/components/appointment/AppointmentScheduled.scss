@@ -1,0 +1,27 @@
+.appointment-scheduled {
+  width: 50%;
+  margin-bottom: 30px;
+
+  .appointment-header {
+    display: flex;
+
+    .check-button {
+      color: #096262;
+    }
+    .confirmation {
+      font-weight: bold;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+  }
+
+  .prepation {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .prepation-step1 {
+    margin-top: 20px;
+  }
+}

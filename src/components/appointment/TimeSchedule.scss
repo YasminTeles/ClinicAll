@@ -1,0 +1,67 @@
+.time-schedule {
+  background-color: #096262;
+  margin-top: -28px;
+  padding-bottom: 60px;
+
+    .schedule-header {
+      margin-top: -28px;
+      padding-top: 40px;
+      display: flex;
+
+      .available-time {
+        font-family: Mulish;
+        color: white;
+        font-weight: 800;
+        font-size: 28px;
+        margin-left: 50px;
+      }
+    }
+
+    .scheduler {
+      width: 90%;
+      margin-left: 50px;
+      padding: 5px;
+      margin-top: 30px;
+      border-radius: 20px;
+
+      .day-options {
+        display: flex;
+        justify-content: space-around;
+
+        .picker {
+          margin-top: 30px;
+          width: 23%;
+        }
+      }
+
+      .time-options {
+        margin-left: 70px;
+        margin-top: 40px;
+
+        .chosen-day {
+          font-family: "Mulish";
+          font-size: 22px;
+          font-weight: 800;
+        }
+
+        .option-description {
+          margin-top: 10px;
+        }
+      }
+
+      .confirmation-box {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px 90px 0px 90px;
+
+        .calendar {
+          width: 40%;
+        }
+
+        .confirmation-text {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+    }
+}
