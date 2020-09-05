@@ -5,7 +5,7 @@ import MicOffOutlinedIcon from '@material-ui/icons/MicOffOutlined';
 import VideocamOffOutlinedIcon from '@material-ui/icons/VideocamOffOutlined';
 import SpeakerNotesOffOutlinedIcon from '@material-ui/icons/SpeakerNotesOffOutlined';
 import AccessibilityOutlinedIcon from '@material-ui/icons/AccessibilityOutlined';
-import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
+import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import { withStyles } from "@material-ui/core/styles"
 import IconButton from '@material-ui/core/IconButton';
@@ -78,7 +78,7 @@ class VideoMenu extends React.Component {
           className={openTextChat ? "buttonoff" : "buttonon"}
           onClick={() => toggleTextChat()}
         >
-          <ChatOutlinedIcon />
+          <ForumOutlinedIcon />
         </IconButton>
 
         <IconButton aria-label="delete" color="secondary" className={openHumanBody ? "buttonoff" : "buttonon"} onClick={() => changeOpenHumanBody()}>
