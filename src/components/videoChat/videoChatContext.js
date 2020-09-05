@@ -7,11 +7,13 @@ const CustomProvider = ({ children }) => {
   const [disableVideo, setDisabledVideo] = useState(false)
   const [openHumanBody, setOpenHumanBody] = useState(false)
   const [subtitleState, setSubtitleState] = useState(true)
+  const [disableLegend, setDisabledLegend] = useState(false)
   const context = {
     disableAudio,
     disableVideo,
     openHumanBody,
     subtitleState,
+    disableLegend,
     changeAudioState() {
       setDisabledAudio(!disableAudio)
     },
@@ -23,7 +25,10 @@ const CustomProvider = ({ children }) => {
     },
     changeSubtitleState() {
       setSubtitleState(!subtitleState)
-    }
+    },
+    toggleLegend() {
+      setDisabledLegend(!disableLegend)
+    },
   }
 
   return (

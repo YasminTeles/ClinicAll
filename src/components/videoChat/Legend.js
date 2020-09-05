@@ -5,6 +5,7 @@ import Chat from "twilio-chat"
 import { v4 as uuidv4 } from "uuid"
 
 import { chatToken } from "../../services/tokens"
+import { VideoChatContext } from "./videoChatContext"
 
 const styles = {
   root: {
@@ -83,13 +84,21 @@ class Legend extends React.PureComponent {
       })
   }
 
+  static contextType = VideoChatContext
+
   render() {
+    const { disableLegend } = this.context
     const { classes } = this.props
     const { message } = this.state
+
     return (
-      <span className={classes.root}>
-        {message}
-      </span>
+      <>
+        {!disableLegend && (
+          <span className={classes.root}>
+            {message}
+          </span>
+        )}
+      </>
     )
   }
 }

@@ -35,7 +35,16 @@ class VideoMenu extends React.Component {
 
   render(){
     const context = this.context
-    const {disableAudio, disableVideo, changeAudioState, changeVideoState, changeOpenHumanBody, openHumanBody} = context
+    const {
+      disableAudio,
+      disableVideo,
+      changeAudioState,
+      changeVideoState,
+      changeOpenHumanBody,
+      openHumanBody,
+      disableLegend,
+      toggleLegend,
+    } = context
     return(
       <div className="box">
         <RegularButton variant="text" color="primary" disabled className={disableAudio ? "buttonoff" : "buttonon"} disableElevation>
@@ -50,7 +59,12 @@ class VideoMenu extends React.Component {
           <VideocamOffOutlinedIcon />
         </IconButton>
 
-        <IconButton aria-label="delete" color="secondary" className="buttonon">
+        <IconButton
+          aria-label="delete"
+          color="secondary"
+          className={disableLegend ? "buttonoff" : "buttonon"}
+          onClick={() => toggleLegend()}
+        >
           <SpeakerNotesOffOutlinedIcon />
         </IconButton>
 
