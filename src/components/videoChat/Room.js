@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button"
 import { withStyles } from "@material-ui/core/styles"
 import ArrowBackIcon from "@material-ui/icons/ArrowBack"
 import Video from "twilio-video"
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidV4 } from "uuid"
 
 import createChat from "../../services/chat"
 import createRecognizer from "../../services/speechToText"
@@ -40,11 +40,15 @@ const RegularButton = withStyles(() => ({
   },
 }))(Button)
 
-const Room = ({ roomName, token, handleLogout }) => {
+const Room = ({
+  roomName, token, logoutTextChat, handleLogout,
+}) => {
   const [room, setRoom] = useState(null)
   const [participants, setParticipants] = useState([])
   const context = useContext(VideoChatContext)
-  const { openHumanBody, disableVideo, disableAudio } = context
+  const {
+    openHumanBody, disableVideo, disableAudio, setLogoutTextChat,
+  } = context
 
   const remoteParticipants = participants.map((participant) => (
     <Participant key={participant.sid} participant={participant} type="remote" />
@@ -65,7 +69,7 @@ const Room = ({ roomName, token, handleLogout }) => {
       room.on("participantConnected", participantConnected)
       room.on("participantDisconnected", participantDisconnected)
       room.participants.forEach(participantConnected)
-      const uuid = uuidv4()
+      const uuid = uuidV4()
       createChat(`legend in - ${uuid}`)
       createRecognizer()
     })
@@ -111,7 +115,14 @@ const Room = ({ roomName, token, handleLogout }) => {
   return (
     <div className="room">
       <div className="video">
-        <RegularButton variant="text" color="primary" className="button" startIcon={<ArrowBackIcon />} disableElevation onClick={handleLogout}>
+        <RegularButton
+          variant="text"
+          color="primary"
+          className="button"
+          startIcon={<ArrowBackIcon />}
+          disableElevation
+          onClick={handleLogout}
+        >
           Voltar para o dashboard
         </RegularButton>
 
@@ -138,7 +149,7 @@ const Room = ({ roomName, token, handleLogout }) => {
           <PainClassification />
         </Chat>
       )}
-      <TextChat />
+      <TextChat logoutTextChat={logoutTextChat} />
     </div>
   )
 }

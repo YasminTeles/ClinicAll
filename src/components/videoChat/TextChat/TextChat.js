@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import CloseIcon from "@material-ui/icons/Close"
 import Chat from "twilio-chat"
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidV4 } from "uuid"
 
 import { chatToken } from "../../../services/tokens"
 import { VideoChatContext } from "../videoChatContext"
@@ -43,14 +43,14 @@ const styles = {
   },
 }
 
-class TextChat extends React.PureComponent {
+class TextChat extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       channel: {},
       messages: [],
-      identity: `person - ${uuidv4()}`,
+      identity: `person - ${uuidV4()}`,
     }
 
     this.sendMessage = this.sendMessage.bind(this)
@@ -61,6 +61,14 @@ class TextChat extends React.PureComponent {
     this.setupChatClient(identity)
   }
 
+  componentDidUpdate() {
+    const { logoutTextChat } = this.props
+    console.log({ logoutTextChat })
+    if (logoutTextChat) {
+      this.logout()
+    }
+  }
+
   setupChatClient(identity) {
     const token = chatToken(identity)
 
@@ -68,6 +76,15 @@ class TextChat extends React.PureComponent {
       client.getSubscribedChannels().then(
         this.createOrJoinGeneralChannel(client),
       )
+
+      // client.on("memberJoined", () {
+      //   const { channel } = this.state
+      //   channel.getMembers().then((members) => {
+      //     const { length } = members
+      //     console.log({ length })
+      //   })
+      //   client.shutdown()
+      // }
     }).catch((error) => {
       console.error(error)
     })
@@ -83,6 +100,20 @@ class TextChat extends React.PureComponent {
       this.setState({
         messages: [...messages, message],
       })
+
+      channel.getMembersCount((count) => {
+        console.log(`Total members in the channel: ${count}`)
+      })
+
+      channel.getMembers().then((members) => {
+        const { length } = members
+        console.log({ length })
+      })
+    })
+
+    channel.on("memberLeft", (member) => {
+      console.log("alguém saiu do canal")
+      console.log(member.state.identity)
     })
   }
 
@@ -94,7 +125,7 @@ class TextChat extends React.PureComponent {
   }
 
   createOrJoinGeneralChannel(client) {
-    const chatName = "clinicall - persons"
+    const chatName = "clinicAll - persons 2"
     client.getChannelByUniqueName(chatName)
       .then((channel) => {
         this.setState({
@@ -116,10 +147,27 @@ class TextChat extends React.PureComponent {
       })
   }
 
+  exitScreen() {
+    window.onbeforeunload = () => {
+      this.logout()
+    }
+
+    window.onunload = () => {
+      this.logout()
+    }
+  }
+
+  logout() {
+    const { channel } = this.state
+    channel.leave()
+  }
+
   render() {
     const { openTextChat, toggleTextChat } = this.context
     const { classes } = this.props
     const { messages, identity } = this.state
+
+    this.exitScreen()
 
     return (
       <SwipeableDrawer

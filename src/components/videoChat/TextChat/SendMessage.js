@@ -7,6 +7,8 @@ import InputAdornment from "@material-ui/core/InputAdornment"
 import OutlinedInput from "@material-ui/core/OutlinedInput"
 import SendIcon from "@material-ui/icons/Send"
 
+const ENTER_KEY = 13
+
 const styles = {
   root: {
     display: "flex",
@@ -21,6 +23,18 @@ function SendMessage(props) {
     setNewMessage(event.target.value)
   }
 
+  const clearMessage = () => {
+    setNewMessage("")
+  }
+
+  const sendMessageWithEnterKey = () => (event) => {
+    const { sendMessage } = props
+    if (event.keyCode === ENTER_KEY) {
+      sendMessage(newMessage)
+      clearMessage()
+    }
+  }
+
   const { classes, sendMessage } = props
   return (
     <FormControl>
@@ -28,14 +42,16 @@ function SendMessage(props) {
         <OutlinedInput
           id="newMessage"
           fullWidth
-          placeholder="Digite uma messagem"
+          placeholder="Digite uma mensagem"
           value={newMessage}
           onChange={handleChange()}
+          onKeyDown={sendMessageWithEnterKey()}
           endAdornment={(
             <InputAdornment position="end">
               <IconButton
                 onClick={() => {
                   sendMessage(newMessage)
+                  clearMessage()
                 }}
                 edge="end"
               >

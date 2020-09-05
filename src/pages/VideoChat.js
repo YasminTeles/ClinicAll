@@ -16,6 +16,7 @@ class VideoChat extends React.Component {
       room: 'bbb',
       token: null,
       back: false,
+      logoutTextChat: false,
     }
   }
 
@@ -60,6 +61,7 @@ class VideoChat extends React.Component {
       ...this.state,
       token: null,
       back: true,
+      logoutTextChat: true,
     })
   }
 
@@ -73,12 +75,12 @@ class VideoChat extends React.Component {
       this.handleLogout();
     }
 
-    const {room, token, back} = this.state
+    const {room, token, logoutTextChat, back} = this.state
     return (
       <div>
           {token ? (
             <VideoChatProvider>
-              <Room roomName={room} token={token} handleLogout={this.handleLogout} />
+              <Room roomName={room} token={token} logoutTextChat={logoutTextChat} handleLogout={this.handleLogout} />
             </VideoChatProvider>
           ) : back && (
             <Redirect to={{ pathname: "/" }} />
