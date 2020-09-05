@@ -1,16 +1,21 @@
 import React, { useState, useEffect, useContext } from "react"
+
 import Button from "@material-ui/core/Button"
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { withStyles } from "@material-ui/core/styles"
-import VideoMenu from "./VideoMenu"
-import { VideoChatContext } from "./videoChatContext"
-import Chat from "./Chat"
+import ArrowBackIcon from "@material-ui/icons/ArrowBack"
+import Video from "twilio-video"
+import { v4 as uuidv4 } from "uuid"
+
+import createChat from "../../services/chat"
+import createRecognizer from "../../services/speechToText"
 import Male from "../ReactHumanBody/Male"
 import PainClassification from "../ReactHumanBody/PainClassification"
-
-import Video from "twilio-video"
-
+import Chat from "./Chat"
+import Legend from "./Legend"
 import Participant from "./Participant"
+import { VideoChatContext } from "./videoChatContext"
+import VideoMenu from "./VideoMenu"
+
 import "./Room.scss"
 
 const RegularButton = withStyles(() => ({
@@ -38,15 +43,15 @@ const Room = ({ roomName, token, handleLogout }) => {
   const [room, setRoom] = useState(null)
   const [participants, setParticipants] = useState([])
   const context = useContext(VideoChatContext)
-  const {openHumanBody, disableVideo, disableAudio} = context
+  const { openHumanBody, disableVideo, disableAudio } = context
 
   const remoteParticipants = participants.map((participant) => (
-    <Participant key={participant.sid} participant={participant} type="remote"/>
+    <Participant key={participant.sid} participant={participant} type="remote" />
   ))
 
   useEffect(() => {
     const participantConnected = (participant) => {
-        setParticipants((prevParticipants) => [...prevParticipants, participant])
+      setParticipants((prevParticipants) => [...prevParticipants, participant])
     }
     const participantDisconnected = (participant) => {
       setParticipants((prevParticipants) => prevParticipants.filter((p) => p !== participant))
@@ -59,11 +64,13 @@ const Room = ({ roomName, token, handleLogout }) => {
       room.on("participantConnected", participantConnected)
       room.on("participantDisconnected", participantDisconnected)
       room.participants.forEach(participantConnected)
+      const uuid = uuidv4()
+      createChat(`legend in - ${uuid}`)
+      createRecognizer()
     })
 
     return () => {
       setRoom((currentRoom) => {
-
         if (currentRoom && currentRoom.localParticipant.state === "connected") {
           currentRoom.localParticipant.tracks.forEach((trackPublication) => {
             trackPublication.track.stop()
@@ -91,7 +98,7 @@ const Room = ({ roomName, token, handleLogout }) => {
   useEffect(() => {
     if (room && disableVideo) {
       room.localParticipant.videoTracks.forEach((publication) => {
-        publication.track.disable();
+        publication.track.disable()
       })
     } else if (room && !disableVideo) {
       room.localParticipant.videoTracks.forEach((publication) => {
@@ -107,7 +114,7 @@ const Room = ({ roomName, token, handleLogout }) => {
           Voltar para o dashboard
         </RegularButton>
 
-        <VideoMenu/>
+        <VideoMenu />
 
         <div className="remote-participant">{remoteParticipants[0]}</div>
         <div className={openHumanBody ? "local-participant-tab" : "local-participant"}>
@@ -122,11 +129,12 @@ const Room = ({ roomName, token, handleLogout }) => {
             ""
           )}
         </div>
+        <Legend />
       </div>
       { openHumanBody && (
         <Chat>
-          <Male/>
-          <PainClassification/>
+          <Male />
+          <PainClassification />
         </Chat>
       )}
     </div>
