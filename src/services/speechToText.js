@@ -1,7 +1,5 @@
 import * as sdk from "microsoft-cognitiveservices-speech-sdk"
 
-import { sendMessage } from "./chat"
-
 const subscriptionKey = "3482347f1fd64ccf8cbe6342ef3a5ae8"
 const serviceRegion = "westus"
 
@@ -19,8 +17,6 @@ const createRecognizer = () => {
     } else {
       console.log(`(recognized)  Reason: ${sdk.ResultReason[e.result.reason]} | Duration: ${e.result.duration} | Offset: ${e.result.offset}`)
       console.log(`Text: ${e.result.text}`)
-
-      sendMessage(e.result.text)
     }
   }
 

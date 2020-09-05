@@ -4,10 +4,7 @@ import Button from "@material-ui/core/Button"
 import { withStyles } from "@material-ui/core/styles"
 import ArrowBackIcon from "@material-ui/icons/ArrowBack"
 import Video from "twilio-video"
-import { v4 as uuidV4 } from "uuid"
 
-import createChat from "../../services/chat"
-import createRecognizer from "../../services/speechToText"
 import Male from "../ReactHumanBody/Male"
 import PainClassification from "../ReactHumanBody/PainClassification"
 import Chat from "./Chat"
@@ -69,9 +66,6 @@ const Room = ({
       room.on("participantConnected", participantConnected)
       room.on("participantDisconnected", participantDisconnected)
       room.participants.forEach(participantConnected)
-      const uuid = uuidV4()
-      createChat(`legend in - ${uuid}`)
-      createRecognizer()
     })
 
     return () => {
@@ -141,7 +135,7 @@ const Room = ({
             ""
           )}
         </div>
-        <Legend />
+        <Legend logoutTextChat={logoutTextChat} />
       </div>
       { openHumanBody && (
         <Chat>
