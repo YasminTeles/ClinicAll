@@ -8,12 +8,14 @@ const CustomProvider = ({ children }) => {
   const [openHumanBody, setOpenHumanBody] = useState(false)
   const [subtitleState, setSubtitleState] = useState(true)
   const [disableLegend, setDisabledLegend] = useState(false)
+  const [openTextChat, setOpenTextChat] = useState(false)
   const context = {
     disableAudio,
     disableVideo,
     openHumanBody,
     subtitleState,
     disableLegend,
+    openTextChat,
     changeAudioState() {
       setDisabledAudio(!disableAudio)
     },
@@ -22,12 +24,17 @@ const CustomProvider = ({ children }) => {
     },
     changeOpenHumanBody() {
       setOpenHumanBody(!openHumanBody)
+      setOpenTextChat(false)
     },
     changeSubtitleState() {
       setSubtitleState(!subtitleState)
     },
     toggleLegend() {
       setDisabledLegend(!disableLegend)
+    },
+    toggleTextChat() {
+      setOpenTextChat(!openTextChat)
+      setOpenHumanBody(false)
     },
   }
 

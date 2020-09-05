@@ -13,6 +13,7 @@ import PainClassification from "../ReactHumanBody/PainClassification"
 import Chat from "./Chat"
 import Legend from "./Legend"
 import Participant from "./Participant"
+import TextChat from "./TextChat/TextChat"
 import { VideoChatContext } from "./videoChatContext"
 import VideoMenu from "./VideoMenu"
 
@@ -137,6 +138,7 @@ const Room = ({ roomName, token, handleLogout }) => {
           <PainClassification />
         </Chat>
       )}
+      <TextChat />
     </div>
   )
 }

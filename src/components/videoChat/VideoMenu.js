@@ -1,4 +1,5 @@
 import React from "react"
+
 import Button from "@material-ui/core/Button"
 import MicOffOutlinedIcon from '@material-ui/icons/MicOffOutlined';
 import VideocamOffOutlinedIcon from '@material-ui/icons/VideocamOffOutlined';
@@ -8,6 +9,7 @@ import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import { withStyles } from "@material-ui/core/styles"
 import IconButton from '@material-ui/core/IconButton';
+
 import { VideoChatContext } from "./videoChatContext"
 
 import "./VideoMenu.scss"
@@ -44,6 +46,8 @@ class VideoMenu extends React.Component {
       openHumanBody,
       disableLegend,
       toggleLegend,
+      openTextChat,
+      toggleTextChat,
     } = context
     return(
       <div className="box">
@@ -68,7 +72,12 @@ class VideoMenu extends React.Component {
           <SpeakerNotesOffOutlinedIcon />
         </IconButton>
 
-        <IconButton aria-label="delete" color="secondary" className="buttonon">
+        <IconButton
+          aria-label="delete"
+          color="secondary"
+          className={openTextChat ? "buttonoff" : "buttonon"}
+          onClick={() => toggleTextChat()}
+        >
           <ChatOutlinedIcon />
         </IconButton>
 
@@ -83,42 +92,5 @@ class VideoMenu extends React.Component {
     )
   }
 }
-
-// const VideoMenu = () => {
-//     const context = useContext(VideoChatContext)
-//     const {audioState, videoState, changeAudioState, changeVideoState} = context
-//     return (
-//       <div className="box">
-
-//         <RegularButton variant="text" color="primary" disabled className={audioState ? "buttonon": "buttonoff"} disableElevation>
-//           Audio {audioState ? 'on' : 'off'}
-//         </RegularButton>
-
-//         <IconButton aria-label="delete" color="secondary" className={audioState ? "buttonon": "buttonoff"} onClick={changeAudioState()}>
-//           <MicOffOutlinedIcon />
-//         </IconButton>
-
-//         <IconButton aria-label="delete" color="secondary" className={videoState ? "buttonon": "buttonoff"} onClick={changeVideoState()}>
-//           <VideocamOffOutlinedIcon />
-//         </IconButton>
-
-//         <IconButton aria-label="delete" color="secondary" className="buttonon">
-//           <SpeakerNotesOffOutlinedIcon />
-//         </IconButton>
-
-//         <IconButton aria-label="delete" color="secondary" className="buttonon">
-//           <ChatOutlinedIcon />
-//         </IconButton>
-
-//         <IconButton aria-label="delete" color="secondary" className="buttonon">
-//           <AccessibilityOutlinedIcon />
-//         </IconButton>
-
-//         <IconButton aria-label="delete" color="secondary" className="buttonon">
-//           <DescriptionOutlinedIcon />
-//         </IconButton>
-//         </div>
-//     )
-// }
 
 export default VideoMenu
