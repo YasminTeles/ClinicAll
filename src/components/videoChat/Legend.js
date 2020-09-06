@@ -10,10 +10,17 @@ import { chatToken } from "../../services/tokens"
 import { VideoChatContext } from "./videoChatContext"
 
 const styles = {
+  box: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
   root: {
+    position: "absolute",
+    bottom: "8%",
     // border: "1px solid #ff0000",
   },
   legend: {
+    fontSize: 22,
     color: "#FFFFFF",
     background: "#000000",
   },
@@ -140,15 +147,15 @@ class Legend extends React.PureComponent {
     this.exitScreen()
 
     return (
-      <>
+      <div className={classes.box}>
         {!disableLegend && (
         <div className={classes.root}>
-          <span className={classes.legend}>
+          <div className={classes.legend}>
             {message}
-          </span>
+          </div>
         </div>
         )}
-      </>
+      </div>
     )
   }
 }
