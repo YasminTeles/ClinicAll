@@ -44,7 +44,7 @@ const Room = ({
   const [participants, setParticipants] = useState([])
   const context = useContext(VideoChatContext)
   const {
-    openHumanBody, disableVideo, disableAudio, setLogoutTextChat,
+    openHumanBody, disableVideo, disableAudio, setLogoutTextChat, openTextChat,
   } = context
 
   const remoteParticipants = participants.map((participant) => (
@@ -123,7 +123,7 @@ const Room = ({
         <VideoMenu />
 
         <div className="remote-participant">{remoteParticipants[0]}</div>
-        <div className={openHumanBody ? "local-participant-tab" : "local-participant"}>
+        <div className={(openHumanBody || openTextChat) ? "local-participant-tab" : "local-participant"}>
           {room ? (
             <Participant
               key={room.localParticipant.sid}
