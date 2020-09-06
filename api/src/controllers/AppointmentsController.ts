@@ -1,10 +1,10 @@
-import { Request, Response } from "express"
+import { NowRequest, NowResponse } from '@vercel/node'
 
 import db from "../database/connection"
 import convertHourToMinutes from "../utils/convertHourToMinutes"
 
 export default class AppointmentsController {
-    async index(request: Request, response: Response) {
+    async index(request: NowRequest, response: NowResponse) {
         const filters = request.query
 
         const user = filters.user_id as string
@@ -20,7 +20,7 @@ export default class AppointmentsController {
         return response.json(appointments)
     }
 
-    async create(request: Request, response: Response) {
+    async create(request: NowRequest, response: NowResponse) {
         const {
             user_id,
             doctor_id,
@@ -47,7 +47,7 @@ export default class AppointmentsController {
 
             await transaction.commit()
 
-            return response.status(201).send()
+            return response.status(201).send("")
 
         } catch(error) {
             console.error(error)

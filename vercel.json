@@ -1,0 +1,17 @@
+{
+  "routes": [
+    { "src": "/userappointments", "methods": ["POST"], "dest": "/create.ts" },
+    { "src": "/userappointments", "methods": ["GET"], "dest": "/index.ts" },
+
+    { "src": "/doctors", "methods": ["POST"], "dest": "/create.ts" },
+    { "src": "/doctors", "methods": ["GET"], "dest": "/index.ts" },
+
+    { "src": "/user", "methods": ["POST"], "dest": "/create.ts" },
+    { "src": "/user", "methods": ["GET"], "dest": "/index.ts" },
+
+    { "src": "/connections", "methods": ["POST"], "dest": "/create.ts" },
+    { "src": "/connections", "methods": ["GET"], "dest": "/index.ts" },
+
+    { "src": "/healthcheck", "methods": ["GET"], "dest": "/index.ts" }
+  ]
+}

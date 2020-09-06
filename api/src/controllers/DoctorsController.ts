@@ -1,8 +1,9 @@
-import { Request, Response } from "express"
+import { NowRequest, NowResponse } from '@vercel/node'
+
 import db from "../database/connection"
 
 export default class DoctorsController {
-    async index(request: Request, response: Response){
+    async index(request: NowRequest, response: NowResponse){
       const filters = request.query
 
       const type = filters.type as string
@@ -21,7 +22,7 @@ export default class DoctorsController {
       return response.json(doctor)
     }
 
-    async create(request: Request, response: Response){
+    async create(request: NowRequest, response: NowResponse){
         const {
           name,
           avatar,
@@ -43,7 +44,7 @@ export default class DoctorsController {
 
           await transaction.commit()
 
-          return response.status(201).send()
+          return response.status(201).send("")
 
         } catch(error) {
           console.error(error)
