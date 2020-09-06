@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function DoctorInfo(props) {
-  const userEnsurance = null
+  const userEnsurance = "Unimed"
   const classes = useStyles()
   const { doctor } = props
   const {

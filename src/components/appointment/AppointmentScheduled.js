@@ -1,5 +1,6 @@
 import React from "react"
-import CheckIcon from '@material-ui/icons/Check';
+
+import CheckIcon from "@material-ui/icons/Check"
 
 import "./AppointmentScheduled.scss"
 
@@ -7,7 +8,7 @@ function AppointmentScheduled() {
   return (
     <div className="appointment-scheduled">
       <div className="appointment-header">
-        <CheckIcon className="check-button"/>
+        <CheckIcon className="check-button" />
         <div className="confirmation">
           Consulta online marcada!
         </div>
@@ -16,7 +17,11 @@ function AppointmentScheduled() {
         Preparo para a consulta
       </div>
       <div className="prepation-step1">
-      No dia da consulta, o botão <b>Entrar na consulta</b> estará disponível na página Dashboard. Basta clicar nele e você será redirecionado para a vídeo chamada com o médico agendado.
+        No dia da consulta, o botão
+        {" "}
+        <b>Entrar na consulta</b>
+        {" "}
+        estará disponível na página Dashboard. Basta clicar nele e você será redirecionado para a vídeo chamada com o médico agendado.
       </div>
       <div className="prepation-step1">
         No dia da consulta você precisará apenas de uma conexão de internet estável.

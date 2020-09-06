@@ -1,22 +1,21 @@
 import React from "react"
 
-import PlanContent from "../components/appointment/PlanContent"
-import Header from "../components/header/Header"
-import { AppointmentProvider } from "../components/appointment/AppointmentContext";
-import SearchSpeciality from "../components/appointment/SearchSpeciality"
+import { AppointmentProvider } from "../components/appointment/AppointmentContext"
 import DoctorsList from "../components/appointment/DoctorsList"
+import PlanContent from "../components/appointment/PlanContent"
+import SearchSpeciality from "../components/appointment/SearchSpeciality"
+import Header from "../components/header/Header"
 
 import "./Appointment.scss"
 
 function Appointment() {
-
   return (
     <AppointmentProvider>
       <Header />
       <PlanContent>
-        <SearchSpeciality/>
+        <SearchSpeciality />
       </PlanContent>
-      <DoctorsList/>
+      <DoctorsList />
     </AppointmentProvider>
   )
 }

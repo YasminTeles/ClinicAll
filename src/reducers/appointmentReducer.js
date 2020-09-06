@@ -1,6 +1,7 @@
 const initialState = {
   doctor: {},
   user: {},
+  doctors: [],
 }
 
 export const appointmentReducer = (state = initialState, action) => {
@@ -14,6 +15,13 @@ export const appointmentReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
+      }
+    case "ADD_DOCTORS":
+      const newDoctors = state.doctors
+      newDoctors.push(action.doctors)
+      return {
+        ...state,
+        doctors: newDoctors,
       }
     default:
       return state

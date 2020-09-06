@@ -10,7 +10,6 @@ import {
 } from "@material-ui/pickers"
 import _ from "lodash"
 
-import { addAppointment } from "../../actions/index"
 import calendar from "../../assets/calendar.svg"
 import api from "../../services/api"
 import { AppointmentContext } from "./AppointmentContext"
@@ -50,9 +49,9 @@ function TimeSchedule(props) {
   const { doctor, user = {} } = props
 
   const confirmAppointment = () => {
-    if (!_.isEmpty(user[0])) {
+    if (!_.isEmpty(user)) {
       api.post("/userappointments", {
-        user_id: user[0].id,
+        user_id: user.id,
         doctor_id: doctor.id,
         date: selectedDate,
         time,
@@ -116,7 +115,7 @@ function TimeSchedule(props) {
           ) : (
             <>
               <div className="confirmation-text">
-                Consulta online marcarda dia
+                Consulta online marcada dia
                 {" "}
                 {selectedDate.getDate()}
                 {" "}

@@ -57,7 +57,7 @@ class SearchSpeciality extends React.Component {
     return (
         <div className="plan-information">
           <div className="plan">
-            Plano Bradesco Saúde empresa.
+            Plano Unimed
           </div>
           <div className="description">
             As consultas são realizadas por vídeo chamada através da nossa plataforma. Alguns recursos como legenda, libras e tradução por imagem estão disponíveis.
