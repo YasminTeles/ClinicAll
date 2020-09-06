@@ -1,4 +1,4 @@
-import { ADD_DOCTOR, ADD_USER } from "./actionTypes"
+import { ADD_DOCTOR, ADD_USER, ADD_DOCTORS } from "./actionTypes"
 
 export const addDoctor = (value) => ({
   type: ADD_DOCTOR,
@@ -8,4 +8,9 @@ export const addDoctor = (value) => ({
 export const addUser = (value) => ({
   type: ADD_USER,
   user: value,
+})
+
+export const addDoctors = (value) => ({
+  type: ADD_DOCTORS,
+  doctors: value,
 })

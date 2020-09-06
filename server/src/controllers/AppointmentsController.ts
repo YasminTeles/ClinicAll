@@ -8,11 +8,9 @@ export default class AppointmentsController {
         const filters = request.query
 
         const user = filters.user_id as string
-        const doctor = filters.doctor_id as string
 
         const appointments = await db("appointments")
             .where("appointments.user_id", "=", user)
-            .where("appointments.doctor_id", "=", doctor)
             .join("users", "appointments.user_id", "=", "users.id")
             .join("doctors", "appointments.doctor_id", "=", "doctors.id")
             .select(['appointments.*', "users.*", "doctors.*"])

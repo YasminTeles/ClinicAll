@@ -71,6 +71,7 @@ function Doctor(props) {
   const [selected, setSelected] = useState(false)
   const classes = useStyles()
   const { doctor, user = {} } = props
+  const userEnsurance = user.ensurances || "Unimed"
   const {
     avatar, name, price, ensurances = [],
   } = doctor
@@ -98,7 +99,7 @@ function Doctor(props) {
                 {name}
               </Typography>
               <Typography variant="h5" gutterBottom className={classes.price}>
-                { ensurances.includes(user.ensurances) ? "Coberto" : `R$ ${price}`}
+                { ensurances.includes(userEnsurance) ? "Coberto" : `R$ ${price}`}
               </Typography>
             </div>
           )}
