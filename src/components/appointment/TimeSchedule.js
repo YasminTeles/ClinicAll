@@ -1,18 +1,22 @@
-import React, {useState, useContext} from "react"
+import React, { useState, useContext } from "react"
+import { connect } from "react-redux"
+
+import DateFnsUtils from "@date-io/date-fns"
+import { Divider, Button, Paper } from "@material-ui/core"
+import { withStyles } from "@material-ui/core/styles"
 import {
   MuiPickersUtilsProvider,
-  DatePicker
-} from '@material-ui/pickers';
-import { Divider, Button, Paper } from '@material-ui/core';
-import DateFnsUtils from '@date-io/date-fns';
-import { withStyles } from '@material-ui/core/styles';
-import Times from "./Times"
-import {AppointmentContext} from "./AppointmentContext"
+  DatePicker,
+} from "@material-ui/pickers"
+import _ from "lodash"
+
+import { addAppointment } from "../../actions/index"
 import calendar from "../../assets/calendar.svg"
+import api from "../../services/api"
+import { AppointmentContext } from "./AppointmentContext"
 import AppointmentScheduled from "./AppointmentScheduled"
-import {months, weekdays} from "./variables"
-import { connect } from 'react-redux'
-import { addAppointment } from "../../actions/index";
+import Times from "./Times"
+import { months, weekdays } from "./variables"
 
 import "./TimeSchedule.scss"
 
@@ -38,79 +42,100 @@ const ConfirmButton = withStyles(() => ({
   },
 }))(Button)
 
-function TimeSchedule(props){
+function TimeSchedule(props) {
   const context = useContext(AppointmentContext)
-  const {time} = context
+  const { time } = context
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [confirmed, setConfirmed] = useState(false)
-  const {appointments, doctor} = props
+  const { doctor, user = {} } = props
 
   const confirmAppointment = () => {
-    const appointment = {
-      doctor: doctor,
-      time: time,
-      day: selectedDate,
+    if (!_.isEmpty(user[0])) {
+      api.post("/userappointments/appointment", {
+        user_id: user[0].id,
+        doctor_id: doctor.id,
+        date: selectedDate,
+        time,
+        speciality: doctor.speciality,
+        price: doctor.price,
+        annotations: doctor.annotations,
+      })
+      setConfirmed(true)
     }
-    const userAppointments = appointments
-    userAppointments.push(appointment)
-    props.dispatch(addAppointment(userAppointments))
-    setConfirmed(true)
   }
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+    setSelectedDate(date)
+  }
 
-  return(
+  return (
     <div className="time-schedule">
-        <div className="schedule-header">
-          <div className="available-time">
-              Horários disponíveis
+      <div className="schedule-header">
+        <div className="available-time">
+          Horários disponíveis
+        </div>
+      </div>
+      <Paper className="scheduler">
+        <div className="day-options">
+          <div className="picker">
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                autoOk
+                variant="static"
+                openTo="date"
+                disableToolbar
+                value={selectedDate}
+                onChange={handleDateChange}
+              />
+            </MuiPickersUtilsProvider>
+          </div>
+          <div className="time-options">
+            <div className="chosen-day">
+              {weekdays[selectedDate.getDay()]}
+              ,
+              {" "}
+              {selectedDate.getDate()}
+              {" "}
+              de
+              {" "}
+              {months[selectedDate.getMonth()]}
+            </div>
+            <div className="option-description">
+              Selecione um horários disponeiveis abaixo para marcar a sua consulta.
+            </div>
+            <Times />
           </div>
         </div>
-        <Paper className="scheduler">
-          <div className="day-options">
-            <div className="picker">
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <DatePicker
-                  autoOk
-                  variant="static"
-                  openTo="date"
-                  disableToolbar
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                />
-              </MuiPickersUtilsProvider>
-            </div>
-            <div className="time-options">
-              <div className="chosen-day">
-                {weekdays[selectedDate.getDay()]}, {selectedDate.getDate()} de {months[selectedDate.getMonth()]}
+        <Divider />
+        <div className="confirmation-box">
+          {confirmed ? (
+            <>
+              <AppointmentScheduled />
+              <img src={calendar} className="calendar" alt="calendar" />
+            </>
+          ) : (
+            <>
+              <div className="confirmation-text">
+                Consulta online marcarda dia
+                {" "}
+                {selectedDate.getDate()}
+                {" "}
+                de
+                {" "}
+                {months[selectedDate.getMonth()]}
+                {" "}
+                às
+                {" "}
+                {time}
+                ?
               </div>
-              <div className="option-description">
-                Selecione um horários disponeiveis abaixo para marcar a sua consulta.
-              </div>
-              <Times/>
-            </div>
-          </div>
-          <Divider/>
-          <div className="confirmation-box">
-            {confirmed ? (
-              <React.Fragment>
-                <AppointmentScheduled/>
-                <img src={calendar} className="calendar" alt="calendar" />
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <div className="confirmation-text">
-                  Consulta online marcarda dia {selectedDate.getDate()} de {months[selectedDate.getMonth()]} às {time}?
-                </div>
-                <ConfirmButton variant="text" color="primary" className="button" disableElevation onClick={confirmAppointment}>Confirmar</ConfirmButton>
-              </React.Fragment>
-            )}
-          </div>
-        </Paper>
+              <ConfirmButton variant="text" color="primary" className="button" disableElevation onClick={confirmAppointment}>Confirmar</ConfirmButton>
+            </>
+          )}
+        </div>
+      </Paper>
     </div>
   )
 }
 
-export default connect(store => ({ appointments: store.appointments, doctor: store.doctor }))(TimeSchedule)
+export default connect((store) => ({ doctor: store.doctor, user: store.user }))(TimeSchedule)

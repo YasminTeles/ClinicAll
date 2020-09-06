@@ -1,18 +1,44 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
 
 import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react"
 
+import { addUser } from "../actions"
 import AppointmentButton from "../components/appointment/AppointmentButton"
 import Header from "../components/header/Header"
+import api from "../services/api"
 import Home from "./Home"
 
-function Profile() {
+function Profile(props) {
   const { user } = useAuth0()
+  const { email, picture, name } = user
+
+  useEffect(() => {
+    api.get("/users", { params: { email } }).then((userInfo) => {
+      if (userInfo.data.length === 0) {
+        api.post("/users/user", {
+          name,
+          avatar: picture,
+          email,
+          ensurances: [],
+        }).then((response) => {
+          const { id } = response.data
+          props.dispatch(addUser(response.data))
+          api.post("/connections/connection", { user_id: id })
+        })
+      } else {
+        const { id } = userInfo.data
+        props.dispatch(addUser(userInfo.data))
+        api.post("/connections/connection", { user_id: id })
+      }
+    })
+  }, [])
+
   return (
     <>
       <Header />
 
-      <h1>
+      <h1 style={{ marginLeft: 50, marginTop: 60 }}>
         Bem vinda de volta,
         {" "}
         {user.name}
@@ -23,6 +49,6 @@ function Profile() {
   )
 }
 
-export default withAuthenticationRequired(Profile, {
+export default connect((store) => ({ currentUser: store.user }))(withAuthenticationRequired(Profile, {
   onRedirecting: () => <Home />,
-})
+}))
