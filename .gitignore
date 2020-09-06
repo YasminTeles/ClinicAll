@@ -33,3 +33,5 @@ yarn.lock
 *.code-workspace
 
 .vercel
+
+.env
