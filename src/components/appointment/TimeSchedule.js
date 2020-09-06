@@ -50,7 +50,7 @@ function TimeSchedule(props) {
 
   const confirmAppointment = () => {
     if (!_.isEmpty(user)) {
-      api.post("/userappointments", {
+      api.post("/userappointments/create", {
         user_id: user.id,
         doctor_id: doctor.id,
         date: selectedDate,
@@ -128,7 +128,15 @@ function TimeSchedule(props) {
                 {time}
                 ?
               </div>
-              <ConfirmButton variant="text" color="primary" className="button" disableElevation onClick={confirmAppointment}>Confirmar</ConfirmButton>
+              <ConfirmButton
+                variant="text"
+                color="primary"
+                className="button"
+                disableElevation
+                onClick={confirmAppointment}
+              >
+                Confirmar
+              </ConfirmButton>
             </>
           )}
         </div>

@@ -20,7 +20,8 @@ function Profile(props) {
   useEffect(() => {
     api.get("/user", { params: { email } }).then((userInfo) => {
       if (userInfo.data.length === 0) {
-        api.post("/user", {
+        console.log("profile")
+        api.post("/user/create", {
           name,
           avatar: picture,
           email,
@@ -30,13 +31,13 @@ function Profile(props) {
           console.log("post: ", response.data)
           props.dispatch(addUser(response.data))
           setDispatched(true)
-          // api.post("/connections", { user_id: id })
+          api.post("/connections/create", { user_id: id })
         })
       } else {
         const { id } = userInfo.data[0]
         props.dispatch(addUser(userInfo.data[0]))
         setDispatched(true)
-        // api.post("/connections", { user_id: id })
+        api.post("/connections/create", { user_id: id })
       }
     })
   }, [])
