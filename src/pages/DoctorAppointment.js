@@ -1,10 +1,10 @@
 import React from "react"
 
-import PlanContent from "../components/appointment/PlanContent"
-import Header from "../components/header/Header"
-import { AppointmentProvider } from "../components/appointment/AppointmentContext";
+import { AppointmentProvider } from "../components/appointment/AppointmentContext"
 import DoctorInfo from "../components/appointment/DoctorInfo"
+import PlanContent from "../components/appointment/PlanContent"
 import TimeSchedule from "../components/appointment/TimeSchedule"
+import Header from "../components/header/Header"
 
 import "./Appointment.scss"
 
@@ -13,9 +13,9 @@ function Appointment() {
     <AppointmentProvider>
       <Header />
       <PlanContent>
-        <DoctorInfo/>
+        <DoctorInfo />
       </PlanContent>
-      <TimeSchedule/>
+      <TimeSchedule />
     </AppointmentProvider>
   )
 }
