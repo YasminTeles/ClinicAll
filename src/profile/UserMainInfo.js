@@ -12,6 +12,7 @@ import {
   MuiPickersUtilsProvider,
   DatePicker,
 } from "@material-ui/pickers"
+import _ from "lodash"
 import moment from "moment-timezone"
 
 import { addDoctor } from "../actions"
@@ -39,6 +40,8 @@ function UserMainInfo(props) {
   const { doctors, newAppointments } = props
 
   useEffect(() => {
+    console.log(newAppointments)
+
     newAppointments.sort((a, b) => {
       if (a.date > b.date) {
         return 1
@@ -48,7 +51,10 @@ function UserMainInfo(props) {
       }
       return 0
     })
-    setFirstAppointment(newAppointments[0])
+
+    if (!_.isEmpty(newAppointments)) {
+      setFirstAppointment(newAppointments[0])
+    }
   }, [])
 
   const handleDateChange = (date) => {
