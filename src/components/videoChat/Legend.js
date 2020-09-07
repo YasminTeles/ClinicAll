@@ -1,10 +1,13 @@
 import React from "react"
+import { connect } from "react-redux"
 
 import { withStyles } from "@material-ui/core"
 import * as sdk from "microsoft-cognitiveservices-speech-sdk"
+import { compose } from "recompose"
 import Chat from "twilio-chat"
 import { v4 as uuidV4 } from "uuid"
 
+import { addLegend } from "../../actions/index"
 import createRecognizer from "../../services/speechToText"
 import { chatToken } from "../../services/tokens"
 import { VideoChatContext } from "./videoChatContext"
@@ -103,6 +106,7 @@ class Legend extends React.PureComponent {
   }
 
   createLegend() {
+    const { setLegendFull } = this.props
     const recognizer = createRecognizer()
     recognizer.recognized = (s, e) => {
       if (e.result.reason === sdk.ResultReason.NoMatch) {
@@ -112,6 +116,7 @@ class Legend extends React.PureComponent {
         console.log(`(recognized)  Reason: ${sdk.ResultReason[e.result.reason]} | Duration: ${e.result.duration} | Offset: ${e.result.offset}`)
         console.log(`Text: ${e.result.text}`)
 
+        setLegendFull(e.result.text)
         this.sendMessage(e.result.text)
       }
     }
@@ -162,4 +167,13 @@ class Legend extends React.PureComponent {
 
 Legend.contextType = VideoChatContext
 
-export default withStyles(styles)(Legend)
+const mapDispatchToProps = (dispatch) => ({
+  setLegendFull: (value) => {
+    dispatch(addLegend(value))
+  },
+})
+
+export default compose(
+  withStyles(styles),
+  connect(null, mapDispatchToProps),
+)(Legend)

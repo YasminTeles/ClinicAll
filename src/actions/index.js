@@ -1,4 +1,6 @@
-import { ADD_DOCTOR, ADD_USER, ADD_DOCTORS } from "./actionTypes"
+import {
+  ADD_DOCTOR, ADD_USER, ADD_DOCTORS, ADD_KEY_WORDS,
+} from "./actionTypes"
 
 export const addDoctor = (value) => ({
   type: ADD_DOCTOR,
@@ -13,4 +15,9 @@ export const addUser = (value) => ({
 export const addDoctors = (value) => ({
   type: ADD_DOCTORS,
   doctors: value,
+})
+
+export const addLegend = (value) => ({
+  type: ADD_KEY_WORDS,
+  keyWords: value,
 })
