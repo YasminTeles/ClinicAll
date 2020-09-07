@@ -1,5 +1,6 @@
 import {
-  ADD_DOCTOR, ADD_USER, ADD_DOCTORS, ADD_KEY_WORDS, ADD_PAIN,
+  ADD_DOCTOR, ADD_USER, ADD_DOCTORS,
+  ADD_KEY_WORDS, ADD_PAIN, ADD_HUMAN_BODY,
 } from "./actionTypes"
 
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
   user: {},
   keyWords: "",
   pain: 0,
+  humanBody: [],
 }
 
 // eslint-disable-next-line import/prefer-default-export
@@ -38,12 +40,19 @@ export const appointmentReducer = (state = initialState, action) => {
         ...state,
         keyWords: legendFull,
       }
-    case ADD_PAIN: {
+    case ADD_PAIN:
       return {
         ...state,
         pain: action.pain,
       }
-    }
+    case ADD_HUMAN_BODY:
+      const newHumanBody = state.humanBody
+      newHumanBody.push(action.body)
+      return {
+        ...state,
+        humanBody: newHumanBody,
+      }
+
     default:
       return state
   }

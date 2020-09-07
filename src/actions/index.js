@@ -4,6 +4,7 @@ import {
   ADD_DOCTORS,
   ADD_KEY_WORDS,
   ADD_PAIN,
+  ADD_HUMAN_BODY,
 } from "./actionTypes"
 
 export const addDoctor = (value) => ({
@@ -29,4 +30,9 @@ export const addLegend = (value) => ({
 export const addPain = (value) => ({
   type: ADD_PAIN,
   pain: value,
+})
+
+export const addHumanBody = (value) => ({
+  type: ADD_HUMAN_BODY,
+  body: value,
 })

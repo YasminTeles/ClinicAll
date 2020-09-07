@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { connect } from "react-redux"
+
 import BodyLayout from './BodyLayout'
 import Nasopharynx from './Nasopharynx'
 import OralCavity from './OralCavity'
@@ -30,6 +32,8 @@ import Prostate from './Prostate'
 import SkeletalMuscle from './SkeletalMuscle'
 import Adipose from './Adipose'
 import Skin from './Skin'
+
+import { addHumanBody } from "../../actions/index"
 
 const DEFAULTSHOWSTATUS = true
 const DEFAULTFILLCOLOR = "#808080"
@@ -291,6 +295,8 @@ class BodyMap extends Component {
     this.setState({
       brightColor
     })
+    const { addMale } = this.props
+    addMale(id)
     console.log("Hey you clicked on my", id);
   }
 
@@ -532,4 +538,12 @@ class BodyMap extends Component {
   }
 }
 
-export default BodyMap
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMale: (value) => {
+      dispatch(addHumanBody(value))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(BodyMap)
