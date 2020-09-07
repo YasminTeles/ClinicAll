@@ -48,7 +48,7 @@ class VideoMenu extends React.Component {
       toggleLegend,
       openTextChat,
       toggleTextChat,
-      openAnnotation,
+      disableAnnotation,
       toggleAnnotations
     } = context
     return(
@@ -87,7 +87,7 @@ class VideoMenu extends React.Component {
           <AccessibilityOutlinedIcon />
         </IconButton>
 
-        <IconButton aria-label="delete" color="secondary" className={openAnnotation ? "buttonoff" : "buttonon"} onClick={() => toggleAnnotations()}>
+        <IconButton aria-label="delete" color="secondary" className={disableAnnotation ? "buttonoff" : "buttonon"} onClick={() => toggleAnnotations()}>
           <DescriptionOutlinedIcon />
         </IconButton>
       </div>

@@ -264,7 +264,6 @@ class BodyMap extends Component {
 
   componentDidMount(props){
     const {parts = []} = this.props
-    console.log('parts: ', parts)
     parts.forEach((id) => {
       const {brightColor} = this.state
       brightColor[id] = true
@@ -554,7 +553,6 @@ class BodyMap extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     addMale: (value) => {
-      console.log('value: ', value)
       dispatch(addHumanBody(value))
     }
   }

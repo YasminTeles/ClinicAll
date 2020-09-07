@@ -39,9 +39,6 @@ function PainValues(props) {
         <Button variant="outlined" className={painValue === 4 ? "pain-selected" : "pain-default"} onClick={() => { setPainValue(4); setPain(4) }}> 4 </Button>
         <Button variant="outlined" className={painValue === 5 ? "pain-selected" : "pain-default"} onClick={() => { setPainValue(5); setPain(5) }}> 5 </Button>
       </div>
-      <RegularButton variant="text" color="primary" className="button" disableElevation>
-        Ok
-      </RegularButton>
     </div>
   )
 }

@@ -43,7 +43,7 @@ const Room = ({
   const [participants, setParticipants] = useState([])
   const context = useContext(VideoChatContext)
   const {
-    openHumanBody, disableVideo, disableAudio, setLogoutTextChat, openTextChat, openAnnotation,
+    openHumanBody, disableVideo, disableAudio, setLogoutTextChat, openTextChat,
   } = context
 
   const remoteParticipants = participants.map((participant) => (
@@ -127,7 +127,7 @@ const Room = ({
             ""
           )}
         </div>
-        <Legend logoutTextChat={logoutTextChat} />
+        <Legend chatOpen={(openHumanBody || openTextChat)} logoutTextChat={logoutTextChat} />
       </div>
       { openHumanBody && (
         <Chat>

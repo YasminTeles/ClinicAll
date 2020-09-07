@@ -27,17 +27,16 @@ async function sentimentAnalysis(client) {
   })
 }
 
-sentimentAnalysis(textAnalyticsClient)
+// sentimentAnalysis(textAnalyticsClient)
 
-async function keyPhraseExtraction(client) {
-  const keyPhrasesInput = [
-    "My cat might need to see a veterinarian.",
-  ]
-  const keyPhraseResult = await client.extractKeyPhrases(keyPhrasesInput)
+export async function keyPhraseExtraction(text) {
+  const textAnalyticsClient = new TextAnalyticsClient(endpoint, new AzureKeyCredential(key))
+  const keyPhraseResult = await textAnalyticsClient.extractKeyPhrases(text)
 
   keyPhraseResult.forEach((document) => {
     console.log(`ID: ${document.id}`)
     console.log(`\tDocument Key Phrases: ${document.keyPhrases}`)
   })
+  return keyPhraseResult
 }
-keyPhraseExtraction(textAnalyticsClient)
+// keyPhraseExtraction(textAnalyticsClient)

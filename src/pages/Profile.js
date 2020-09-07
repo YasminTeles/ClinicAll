@@ -21,7 +21,6 @@ function Profile(props) {
   useEffect(() => {
     api.get("/user", { params: { email } }).then((userInfo) => {
       if (userInfo.data.length === 0) {
-        console.log("profile")
         api.post("/user/create", {
           name,
           avatar: picture,
@@ -29,7 +28,6 @@ function Profile(props) {
           ensurances: [],
         }).then((response) => {
           const { id } = response.data
-          console.log("post: ", response.data)
           props.dispatch(addUser(response.data))
           setDispatched(true)
           api.post("/connections/create", { user_id: id })

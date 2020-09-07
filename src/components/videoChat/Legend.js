@@ -84,7 +84,7 @@ class Legend extends React.PureComponent {
   }
 
   createOrJoinGeneralChannel(client) {
-    const chatName = "clinicall - legend 2"
+    const chatName = "clinicall - legend 4"
     client.getChannelByUniqueName(chatName)
       .then((channel) => {
         this.setState({
@@ -115,7 +115,6 @@ class Legend extends React.PureComponent {
         console.log(`(recognized)  Reason: ${sdk.ResultReason[e.result.reason]} | NoMatchReason: ${sdk.NoMatchReason[noMatchDetail.reason]}`)
       } else {
         console.log(`(recognized)  Reason: ${sdk.ResultReason[e.result.reason]} | Duration: ${e.result.duration} | Offset: ${e.result.offset}`)
-        console.log(`Text: ${e.result.text}`)
 
         setLegendFull(e.result.text)
         this.sendMessage(e.result.text)
@@ -146,22 +145,22 @@ class Legend extends React.PureComponent {
   }
 
   render() {
-    const { disableLegend } = this.context
-    const { classes } = this.props
+    const { disableLegend, disableAnnotation } = this.context
+    const { classes, chatOpen } = this.props
     const { message } = this.state
 
     this.exitScreen()
 
     return (
-      <div className={classes.box}>
+      <div>
         {!disableLegend && (
-          <div>
+          <div className={classes.box}>
             <div className={classes.root}>
               <div className={classes.legend}>
                 {message}
               </div>
             </div>
-            <Annotations message={message} />
+            {!disableAnnotation && <Annotations chatOpen={chatOpen} message={message} />}
           </div>
         )}
 

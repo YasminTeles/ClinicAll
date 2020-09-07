@@ -29,11 +29,9 @@ export const appointmentReducer = (state = initialState, action) => {
       }
     case "ADD_KEY_WORDS":
       const legendFull = state.keyWords
-
-      legendFull.concat(action.keyWords)
       return {
         ...state,
-        keyWords: legendFull,
+        keyWords: legendFull.concat(action.keyWords),
       }
     case "ADD_ANNOTATIONS":
       const newAnnotations = state.annotations

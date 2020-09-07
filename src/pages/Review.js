@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 
+import { TextAnalyticsClient, AzureKeyCredential } from "@azure/ai-text-analytics"
 import {
   Button, Avatar, Paper, Card, CardMedia, CardContent, Link,
 } from "@material-ui/core"
@@ -33,20 +34,28 @@ const styles = {
 
 function Review(props) {
   const [schedule, setScheduled] = useState(false)
+  const [currentKeyWords, setKeyWords] = useState([])
   const [ann, setAnn] = useState([])
   const {
-    currentUser, currentDoctor, humanBody, key, pain, annotations, classes,
+    currentUser, currentDoctor, humanBody, keyWords, pain, annotations, classes,
   } = props
+  const key = "83200d7334d4496180aaca4d6ffa9ddb"
+  const endpoint = "https://clinicall.cognitiveservices.azure.com/"
 
   useEffect(() => {
+    const textAnalyticsClient = new TextAnalyticsClient(endpoint, new AzureKeyCredential(key))
+    textAnalyticsClient.extractKeyPhrases([keyWords]).then((result) => {
+      setKeyWords(result[0].keyPhrases)
+    })
+
     if (_.isEmpty(annotations)) {
       setAnn([{
         id: "tosse",
         image: "https://conteudo.imguol.com.br/c/entretenimento/2a/2020/03/24/tosse-de-maneira-correta-1585055081033_v2_615x300.jpg",
       },
       {
-        id: "espirro",
-        image: "https://upload.wikimedia.org/wikipedia/commons/7/77/Sneeze.JPG",
+        id: "febre",
+        image: "https://oparana.com.br/wp-content/uploads/2019/03/6-febre-1132x670.jpg",
       },
       {
         id: "dor de cabeça",
@@ -66,6 +75,8 @@ function Review(props) {
       setAnn(annotations)
     }
   }, [])
+
+  console.log("keywords", currentKeyWords)
 
   return (
     <div>
@@ -99,7 +110,7 @@ function Review(props) {
       </div>
       <div style={{ display: "flex", marginLeft: 50, marginTop: 20 }}>
         <div style={{ display: "flex" }}>
-          { ["Covid-19", "Vacina", "Falta de ar", "Pulmão"].map((keyWord) => (
+          { currentKeyWords.map((keyWord) => (
             <Paper
               elevation={0}
               style={{
@@ -207,11 +218,14 @@ function Review(props) {
   )
 }
 
-export default connect((store) => ({
-  currentUser: store.user,
-  currentDoctor: store.doctor,
-  humanBody: store.humanBody,
-  key: store.keyWords,
-  pain: store.pain,
-  annotations: store.annotations,
-}))(withStyles(styles)(Review))
+export default connect((store) => {
+  console.log("store: ", store)
+  return ({
+    currentUser: store.user,
+    currentDoctor: store.doctor,
+    humanBody: store.humanBody,
+    keyWords: store.keyWords,
+    pain: store.pain,
+    annotations: store.annotations,
+  })
+})(withStyles(styles)(Review))
