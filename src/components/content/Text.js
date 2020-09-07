@@ -50,7 +50,7 @@ class Text extends React.Component {
         <ColorButton variant="contained" color="primary" className='button' disableElevation onClick={this.openChat}>
           Marcar consulta
         </ColorButton>
-        {openChat && <Redirect to={{ pathname: "/chat" }} />}
+        {openChat && <Redirect to={{ pathname: "/appointments" }} />}
       </div>
     )
   }
