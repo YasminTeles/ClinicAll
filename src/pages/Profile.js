@@ -30,13 +30,11 @@ function Profile(props) {
           const { id } = response.data
           props.dispatch(addUser(response.data))
           setDispatched(true)
-          api.post("/connections/create", { user_id: id })
         })
       } else {
         const { id } = userInfo.data[0]
         props.dispatch(addUser(userInfo.data[0]))
         setDispatched(true)
-        api.post("/connections/create", { user_id: id })
       }
     })
   }, [])

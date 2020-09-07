@@ -59,7 +59,6 @@ class ProfileFeed extends React.Component {
         dispatch(addDoctors(doctor))
       })
     })
-    api.post("/connections", { user_id: id })
   }
 
   render() {

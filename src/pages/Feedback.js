@@ -80,7 +80,7 @@ class Feedback extends React.Component {
         <div className="feedback-header">
           Consulta encerrada
         </div>
-        <div className="information">Você acabou de se consultar com:</div>
+        <div className="feedback-information">Você acabou de se consultar com:</div>
         <div className="doctor-information">
           <Paper
             elevation={0}

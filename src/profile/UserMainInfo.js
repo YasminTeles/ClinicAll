@@ -39,11 +39,16 @@ function UserMainInfo(props) {
   const { doctors, newAppointments } = props
 
   useEffect(() => {
-    const first = newAppointments.reduce((app, value) => {
-      if (value.date < app.date) { app = value }
-      return app
-    }, newAppointments[0])
-    setFirstAppointment(first)
+    newAppointments.sort((a, b) => {
+      if (a.date > b.date) {
+        return 1
+      }
+      if (a.date < b.date) {
+        return -1
+      }
+      return 0
+    })
+    setFirstAppointment(newAppointments[0])
   }, [])
 
   const handleDateChange = (date) => {

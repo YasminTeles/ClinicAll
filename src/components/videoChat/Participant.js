@@ -71,7 +71,8 @@ const Participant = ({ participant, type }) => {
             <h3 className="name">
               Consulta com
               {" "}
-              {participant.identity}
+              {/* {participant.identity} */}
+              Dra Maria Ferro
             </h3>
             <h4 className="description">O seu plano oferece cobertura total a essa consulta.</h4>
             <video className="video" ref={videoRef} autoPlay />

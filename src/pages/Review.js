@@ -76,8 +76,6 @@ function Review(props) {
     }
   }, [])
 
-  console.log("keywords", currentKeyWords)
-
   return (
     <div>
       <Header />

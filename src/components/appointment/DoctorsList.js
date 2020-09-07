@@ -17,6 +17,16 @@ function DoctorsList() {
     })
   }, [])
 
+  const description = {
+    Ginecologista: "A Ginecologia é a prática da medicina que lida diretamente com a saúde do aparelho reprodutor feminino (vagina, útero e ovários) e mamas.",
+    Cardiologista: "Cardiologia é a especialidade médica que se ocupa do diagnóstico e tratamento das doenças que acometem o coração bem como os outros componentes do sistema circulatório.",
+    Dentista: "Odontologia ou medicina dentária é a área da saúde humana que estuda e trata do sistema estomatognático.",
+    Ortopedista: "A ortopedia é a especialidade médica que cuida da saúde relacionadas aos elementos do aparelho locomotor, como ossos, músculos, ligamentos e articulações.",
+    Pediatria: "A pediatria é a especialidade médica dedicada à assistência à criança e ao adolescente, nos seus diversos aspectos, sejam eles preventivos ou curativos.",
+    Urologista: "Urologia é uma especialidade cirúrgica da medicina que trata do trato urinário de homens e de mulheres e do sistema reprodutor das pessoas do sexo masculino.",
+    Neurologista: "Neurologia é a especialidade médica que trata dos distúrbios estruturais do sistema nervoso.",
+  }
+
   return (
     <div className={search === "" ? "empty-list" : "full-list"}>
       {
@@ -31,7 +41,7 @@ function DoctorsList() {
               </div>
             </div>
             <div className="description">
-              A ginecologia é a prática da medicina que lida diretamente com a saúde do aparelho reprodutor feminino (vagina, útero e ovários) e mamas.
+              {description[search]}
             </div>
             {
               doctors.filter((doctor) => doctor.speciality === search).slice(0, 4).map((doctor) => <Doctor doctor={doctor} />)
