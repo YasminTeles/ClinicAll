@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 
 import DateFnsUtils from "@date-io/date-fns"
@@ -12,6 +13,8 @@ import {
   DatePicker,
 } from "@material-ui/pickers"
 import moment from "moment-timezone"
+
+import { addDoctor } from "../actions"
 
 const ColorButton = withStyles(() => ({
   root: {
@@ -47,6 +50,11 @@ function UserMainInfo(props) {
     setSelectedDate(date)
   }
 
+  const openChat = (currentDoctor) => {
+    props.dispatch(addDoctor(currentDoctor))
+    setOpen(true)
+  }
+
   return (
     <div style={{ display: "flex", marginTop: 40, justifyContent: "space-around" }}>
       <Paper
@@ -57,19 +65,19 @@ function UserMainInfo(props) {
         }}
       >
         <div style={{ fontSize: 18, fontWeight: "bold" }}>Seus médicos</div>
-        {doctors.slice(0, 3).map((doctor) => (
+        {doctors.slice(0, 3).map((currentDoctor) => (
           <div style={{ display: "flex", marginTop: 25 }}>
             <Avatar
-              src={doctor.avatar}
-              alt={doctor.name}
+              src={currentDoctor.avatar}
+              alt={currentDoctor.name}
               style={{
                 height: 50,
                 width: 50,
               }}
             />
             <div style={{ marginTop: 5, marginLeft: 25 }}>
-              <div style={{ fontWeight: "bold" }}>{doctor.name}</div>
-              <div style={{ fontSize: 14 }}>{doctor.speciality}</div>
+              <div style={{ fontWeight: "bold" }}>{currentDoctor.name}</div>
+              <div style={{ fontSize: 14 }}>{currentDoctor.speciality}</div>
             </div>
           </div>
         ))}
@@ -115,7 +123,7 @@ function UserMainInfo(props) {
               .replace("minutes", "minutos")
               .replace("years", "anos")}`}
           </div>
-          <ColorButton variant="contained" color="primary" className="button" disableElevatio onClick={() => setOpen(true)}>
+          <ColorButton variant="contained" color="primary" className="button" disableElevatio onClick={() => openChat(firstAppointment)}>
             Entrar na consulta
           </ColorButton>
         </div>
@@ -148,4 +156,4 @@ function UserMainInfo(props) {
   )
 }
 
-export default UserMainInfo
+export default connect((store) => ({ doctor: store.doctor }))(UserMainInfo)

@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { connect } from "react-redux"
 
-import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react"
 import _ from "lodash"
 import moment from "moment-timezone"
 
-import { addUser, addDoctors } from "../actions"
-import Header from "../components/header/Header"
+import { addDoctors } from "../actions"
 import api from "../services/api"
-// import Home from "./Home"
 import PreviousAppointments from "./PreviousAppointments"
 import UserMainInfo from "./UserMainInfo"
 
@@ -59,11 +56,10 @@ class ProfileFeed extends React.Component {
           oldAppointments: oldApp,
           doctors: newDoctors,
         })
-        // console.log(newDoctors)
         dispatch(addDoctors(doctor))
       })
     })
-    // api.post("/connections", { user_id: id })
+    api.post("/connections", { user_id: id })
   }
 
   render() {
@@ -72,7 +68,7 @@ class ProfileFeed extends React.Component {
     } = this.state
 
     return (
-      <div>
+      <div style={{ marginBottom: 120 }}>
         { (!_.isEmpty(doctors) && doctors.length === quantity)
           && (
           <>

@@ -1,88 +1,92 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react"
 
 import "./Participant.scss"
 
 const Participant = ({ participant, type }) => {
-  const [videoTracks, setVideoTracks] = useState([]);
-  const [audioTracks, setAudioTracks] = useState([]);
+  const [videoTracks, setVideoTracks] = useState([])
+  const [audioTracks, setAudioTracks] = useState([])
 
-  const videoRef = useRef();
-  const audioRef = useRef();
+  const videoRef = useRef()
+  const audioRef = useRef()
 
-  const trackpubsToTracks = trackMap => Array.from(trackMap.values())
-    .map(publication => publication.track)
-    .filter(track => track !== null);
+  const trackpubsToTracks = (trackMap) => Array.from(trackMap.values())
+    .map((publication) => publication.track)
+    .filter((track) => track !== null)
 
   useEffect(() => {
-    const trackSubscribed = track => {
-      if (track.kind === 'video') {
-        setVideoTracks(videoTracks => [...videoTracks, track]);
+    const trackSubscribed = (track) => {
+      if (track.kind === "video") {
+        setVideoTracks((videoTracks) => [...videoTracks, track])
       } else {
-        setAudioTracks(audioTracks => [...audioTracks, track]);
+        setAudioTracks((audioTracks) => [...audioTracks, track])
       }
-    };
+    }
 
-    const trackUnsubscribed = track => {
-      if (track.kind === 'video') {
-        setVideoTracks(videoTracks => videoTracks.filter(v => v !== track));
+    const trackUnsubscribed = (track) => {
+      if (track.kind === "video") {
+        setVideoTracks((videoTracks) => videoTracks.filter((v) => v !== track))
       } else {
-        setAudioTracks(audioTracks => audioTracks.filter(a => a !== track));
+        setAudioTracks((audioTracks) => audioTracks.filter((a) => a !== track))
       }
-    };
+    }
 
-    setVideoTracks(trackpubsToTracks(participant.videoTracks));
-    setAudioTracks(trackpubsToTracks(participant.audioTracks));
+    setVideoTracks(trackpubsToTracks(participant.videoTracks))
+    setAudioTracks(trackpubsToTracks(participant.audioTracks))
 
-    participant.on('trackSubscribed', trackSubscribed);
-    participant.on('trackUnsubscribed', trackUnsubscribed);
+    participant.on("trackSubscribed", trackSubscribed)
+    participant.on("trackUnsubscribed", trackUnsubscribed)
 
     return () => {
-      setVideoTracks([]);
-      setAudioTracks([]);
-      participant.removeAllListeners();
-    };
-  }, [participant]);
+      setVideoTracks([])
+      setAudioTracks([])
+      participant.removeAllListeners()
+    }
+  }, [participant])
 
   useEffect(() => {
-    const videoTrack = videoTracks[0];
+    const videoTrack = videoTracks[0]
     if (videoTrack) {
-      videoTrack.attach(videoRef.current);
+      videoTrack.attach(videoRef.current)
       return () => {
-        videoTrack.detach();
-      };
+        videoTrack.detach()
+      }
     }
-  }, [videoTracks]);
+  }, [videoTracks])
 
   useEffect(() => {
-    const audioTrack = audioTracks[0];
+    const audioTrack = audioTracks[0]
     if (audioTrack) {
-      audioTrack.attach(audioRef.current);
+      audioTrack.attach(audioRef.current)
       return () => {
-        audioTrack.detach();
-      };
+        audioTrack.detach()
+      }
     }
-  }, [audioTracks]);
+  }, [audioTracks])
 
   return (
     <div className="participant">
       {
-        type === 'remote' ? (
+        type === "remote" ? (
           <div className="remote">
-            <h3 className="name">Consulta com Dr. {participant.identity}</h3>
+            <h3 className="name">
+              Consulta com
+              {" "}
+              {participant.identity}
+            </h3>
             <h4 className="description">O seu plano oferece cobertura total a essa consulta.</h4>
-            <video className="video" ref={videoRef} autoPlay={true} />
-            <audio className="audio" ref={audioRef} autoPlay={true} />
+            <video className="video" ref={videoRef} autoPlay />
+            <audio className="audio" ref={audioRef} autoPlay />
           </div>
         ) : (
           <div className="local">
             <h3 className="name">{participant.identity}</h3>
-            <video className="video" ref={videoRef} autoPlay={true} />
-            <audio className="audio" ref={audioRef} autoPlay={true} muted={true} />
+            <video className="video" ref={videoRef} autoPlay />
+            <audio className="audio" ref={audioRef} autoPlay muted />
           </div>
         )
       }
     </div>
-  );
-};
+  )
+}
 
-export default Participant;
+export default Participant

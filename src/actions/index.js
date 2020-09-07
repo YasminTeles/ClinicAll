@@ -5,11 +5,17 @@ import {
   ADD_KEY_WORDS,
   ADD_PAIN,
   ADD_HUMAN_BODY,
+  ADD_ANNOTATIONS,
 } from "./actionTypes"
 
 export const addDoctor = (value) => ({
   type: ADD_DOCTOR,
   doctor: value,
+})
+
+export const addAnnotation = (value) => ({
+  type: ADD_ANNOTATIONS,
+  annotation: value,
 })
 
 export const addUser = (value) => ({

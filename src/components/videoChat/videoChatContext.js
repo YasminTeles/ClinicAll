@@ -9,6 +9,8 @@ const CustomProvider = ({ children }) => {
   const [subtitleState, setSubtitleState] = useState(true)
   const [disableLegend, setDisabledLegend] = useState(false)
   const [openTextChat, setOpenTextChat] = useState(false)
+  const [openAnnotation, setAnnotations] = useState(false)
+  const [annotations, setMoreAnnotations] = useState([])
   const context = {
     disableAudio,
     disableVideo,
@@ -16,6 +18,8 @@ const CustomProvider = ({ children }) => {
     subtitleState,
     disableLegend,
     openTextChat,
+    openAnnotation,
+    annotations,
     changeAudioState() {
       setDisabledAudio(!disableAudio)
     },
@@ -35,6 +39,13 @@ const CustomProvider = ({ children }) => {
     toggleTextChat() {
       setOpenTextChat(!openTextChat)
       setOpenHumanBody(false)
+    },
+    toggleAnnotations() {
+      setAnnotations(!openAnnotation)
+    },
+    addAnnotation(value) {
+      annotations.push(value)
+      setMoreAnnotations(annotations)
     },
   }
 

@@ -5,6 +5,7 @@ import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react"
 import moment from "moment-timezone"
 
 import { addUser, addDoctors } from "../actions"
+import Footer from "../components/footer/Footer"
 import Header from "../components/header/Header"
 import PreviousAppointments from "../profile/PreviousAppointments"
 import ProfileFeed from "../profile/ProfileFeed"
@@ -43,7 +44,7 @@ function Profile(props) {
   }, [])
 
   return (
-    <div style={{ marginBottom: 60 }}>
+    <div>
       <Header />
 
       <h1 style={{ marginLeft: 50, marginTop: 30 }}>
@@ -57,6 +58,7 @@ function Profile(props) {
       </div>
 
       {dispatched && <ProfileFeed />}
+      <Footer />
     </div>
   )
 }

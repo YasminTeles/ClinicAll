@@ -9,6 +9,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import moment from "moment-timezone"
 
 import AppointmentButton from "../components/appointment/AppointmentButton"
+import "./PreviousAppointments.scss"
 
 const RegularButton = withStyles(() => ({
   root: {
@@ -36,32 +37,29 @@ function PreviousAppointments(props) {
 
   return (
     <>
-      <div style={{ marginTop: 60 }}>
-        <div style={{ marginLeft: 50, fontSize: 24, fontWeight: "bold" }}>Histórico de consultas</div>
-        <div style={{ display: "flex", marginTop: 40, justifyContent: "space-around" }}>
+      <div className="previous-app">
+        <div className="historic-header">Histórico de consultas</div>
+        <div className="historic-app">
           {
               oldAppointments.splice(0, 3).map((app) => (
                 <Card
                   variant="outlined"
                   elevation={0}
-                  style={{
-                    width: 300,
-                    borderRadius: 20,
-                  }}
+                  className="app-card"
                 >
                   <CardMedia
-                    style={{ height: 140 }}
+                    className="card-media"
                     image={app.avatar}
-                    title="Contemplative Reptile"
+                    title="Doctor"
                   />
-                  <CardContent style={{ paddingBottom: 0 }}>
-                    <Typography gutterBottom variant="h5" component="h2" style={{ fontSize: 18, fontFamily: "Mulish", fontWeight: "bold" }}>
+                  <CardContent className="card-content">
+                    <Typography gutterBottom variant="h5" component="h2" className="name">
                       {app.name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily: "Mulish" }}>
+                    <Typography variant="body2" color="textSecondary" component="p" className="speciality">
                       {app.speciality}
                     </Typography>
-                    <Typography variant="body2" component="p" style={{ marginTop: 5, fontFamily: "Mulish", fontWeight: "bold" }}>
+                    <Typography variant="body2" component="p" className="time">
                       {`${moment(app.date).tz("America/Sao_Paulo").fromNow()
                         .replace("hours", "horas")
                         .replace("day", "dia")
@@ -75,15 +73,13 @@ function PreviousAppointments(props) {
                         .replace("minutes", "minutos")
                         .replace("years", "anos")}`}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ marginTop: 10, fontFamily: "Mulish" }}>
+                    <Typography variant="body2" color="textSecondary" component="p" className="description">
                       Consulta de rotina na qual conversaram sobre a possibilidade de realizar exame de covid-19.
                     </Typography>
                     <Typography
                       variant="body2"
                       component="p"
-                      style={{
-                        fontFamily: "Mulish", fontWeight: "bold", marginTop: 10, marginBottom: 5,
-                      }}
+                      className="key-words-header"
                     >
                       Palavras-chaves
                     </Typography>

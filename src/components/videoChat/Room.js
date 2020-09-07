@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 
-import Button from "@material-ui/core/Button"
-import { withStyles } from "@material-ui/core/styles"
-import ArrowBackIcon from "@material-ui/icons/ArrowBack"
+import { withStyles, IconButton } from "@material-ui/core"
+import CloseIcon from "@material-ui/icons/Close"
 import Video from "twilio-video"
 
 import Male from "../ReactHumanBody/Male"
@@ -16,7 +15,7 @@ import VideoMenu from "./VideoMenu"
 
 import "./Room.scss"
 
-const RegularButton = withStyles(() => ({
+const CloseButton = withStyles(() => ({
   root: {
     textTransform: "none",
     position: "absolute",
@@ -35,7 +34,7 @@ const RegularButton = withStyles(() => ({
       fontWeight: "bold",
     },
   },
-}))(Button)
+}))(IconButton)
 
 const Room = ({
   roomName, token, logoutTextChat, handleLogout,
@@ -44,7 +43,7 @@ const Room = ({
   const [participants, setParticipants] = useState([])
   const context = useContext(VideoChatContext)
   const {
-    openHumanBody, disableVideo, disableAudio, setLogoutTextChat, openTextChat,
+    openHumanBody, disableVideo, disableAudio, setLogoutTextChat, openTextChat, openAnnotation,
   } = context
 
   const remoteParticipants = participants.map((participant) => (
@@ -109,16 +108,9 @@ const Room = ({
   return (
     <div className="room">
       <div className="video">
-        <RegularButton
-          variant="text"
-          color="primary"
-          className="button"
-          startIcon={<ArrowBackIcon />}
-          disableElevation
-          onClick={handleLogout}
-        >
-          Voltar para o dashboard
-        </RegularButton>
+        <CloseButton aria-label="delete" onClick={handleLogout}>
+          <CloseIcon />
+        </CloseButton>
 
         <VideoMenu />
 

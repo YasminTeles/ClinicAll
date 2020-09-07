@@ -262,6 +262,19 @@ class BodyMap extends Component {
     }
   }
 
+  componentDidMount(props){
+    const {parts = []} = this.props
+    console.log('parts: ', parts)
+    parts.forEach((id) => {
+      const {brightColor} = this.state
+      brightColor[id] = true
+      this.setState({
+        brightColor
+      })
+    })
+
+  }
+
   getFillColor = (id) => {
     const {brightColor} = this.state
     return brightColor[id] ? "#FF3459" : ((organMap && organMap[id] && organMap[id]['fillColor']) || DEFAULTFILLCOLOR);
@@ -541,6 +554,7 @@ class BodyMap extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     addMale: (value) => {
+      console.log('value: ', value)
       dispatch(addHumanBody(value))
     }
   }

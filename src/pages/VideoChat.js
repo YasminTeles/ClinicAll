@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 import twilio from "twilio"
 
@@ -12,8 +13,8 @@ class VideoChat extends React.Component {
     this.AccessToken = twilio.jwt.AccessToken;
     this.VideoGrant = this.AccessToken.VideoGrant;
     this.state = {
-      user: Math.random().toString(36).substring(7),
-      room: 'bbb',
+      user: this.props.user.name || Math.random().toString(36).substring(7),
+      room: 'consulta',
       token: null,
       back: false,
       logoutTextChat: false,
@@ -83,11 +84,11 @@ class VideoChat extends React.Component {
               <Room roomName={room} token={token} logoutTextChat={logoutTextChat} handleLogout={this.handleLogout} />
             </VideoChatProvider>
           ) : back && (
-            <Redirect to={{ pathname: "/" }} />
+            <Redirect to={{ pathname: "/feedback" }} />
           )}
       </div>
     )
   }
 }
 
-export default VideoChat;
+export default connect((store) => ({ user: store.user }))(VideoChat)

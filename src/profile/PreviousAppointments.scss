@@ -1,0 +1,56 @@
+.previous-app {
+  margin-top: 60px;
+
+  .historic-header {
+    margin-left: 50px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .historic-app {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-around;
+
+    .app-card {
+      width: 300px;
+      border-radius: 20px;
+
+      .card-media {
+        height: 140px;
+      }
+
+      .card-content {
+        padding-bottom: 0px;
+
+        .name {
+          font-size: 18px;
+          font-family: "Mulish";
+          font-weight: bold;
+        }
+
+        .speciality {
+          font-family: "Mulish";
+        }
+
+        .time {
+          margin-top: 5px;
+          font-family: "Mulish";
+          font-weight: bold;
+        }
+
+        .description {
+          margin-top: 10px;
+          font-family: "Mulish";
+        }
+
+        .key-words-header {
+          font-family: "Mulish";
+          font-weight: bold;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}

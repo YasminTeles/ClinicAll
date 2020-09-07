@@ -12,6 +12,7 @@ import _ from "lodash"
 
 import calendar from "../../assets/calendar.svg"
 import api from "../../services/api"
+import Footer from "../footer/Footer"
 import { AppointmentContext } from "./AppointmentContext"
 import AppointmentScheduled from "./AppointmentScheduled"
 import Times from "./Times"
@@ -141,6 +142,7 @@ function TimeSchedule(props) {
           )}
         </div>
       </Paper>
+      <Footer />
     </div>
   )
 }

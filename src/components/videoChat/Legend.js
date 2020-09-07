@@ -10,6 +10,7 @@ import { v4 as uuidV4 } from "uuid"
 import { addLegend } from "../../actions/index"
 import createRecognizer from "../../services/speechToText"
 import { chatToken } from "../../services/tokens"
+import Annotations from "./Annotations"
 import { VideoChatContext } from "./videoChatContext"
 
 const styles = {
@@ -154,12 +155,16 @@ class Legend extends React.PureComponent {
     return (
       <div className={classes.box}>
         {!disableLegend && (
-        <div className={classes.root}>
-          <div className={classes.legend}>
-            {message}
+          <div>
+            <div className={classes.root}>
+              <div className={classes.legend}>
+                {message}
+              </div>
+            </div>
+            <Annotations message={message} />
           </div>
-        </div>
         )}
+
       </div>
     )
   }

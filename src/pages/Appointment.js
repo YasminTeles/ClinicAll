@@ -4,6 +4,7 @@ import { AppointmentProvider } from "../components/appointment/AppointmentContex
 import DoctorsList from "../components/appointment/DoctorsList"
 import PlanContent from "../components/appointment/PlanContent"
 import SearchSpeciality from "../components/appointment/SearchSpeciality"
+import Footer from "../components/footer/Footer"
 import Header from "../components/header/Header"
 
 import "./Appointment.scss"
@@ -16,6 +17,7 @@ function Appointment() {
         <SearchSpeciality />
       </PlanContent>
       <DoctorsList />
+      <Footer />
     </AppointmentProvider>
   )
 }
